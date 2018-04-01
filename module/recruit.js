@@ -1,0 +1,1 @@
+let recruitModel = require('../model/recruit');

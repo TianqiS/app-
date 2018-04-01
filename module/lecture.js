@@ -1,0 +1,1 @@
+let lectureModel = require('../model/lecture');

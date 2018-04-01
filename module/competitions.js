@@ -1,0 +1,1 @@
+let compModel = require('../model/competition');
