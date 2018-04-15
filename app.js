@@ -9,7 +9,7 @@ const db = require('./utils/db');
 
 global.db = db;
 
-const index = require('./routes/index')
+const admin = require('./routes/admin')
 const users = require('./routes/users')
 const common = require('./routes/common')
 
@@ -37,7 +37,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+app.use(admin.routes(), admin.allowedMethods())
 app.use(common.routes(), common.allowedMethods())
 
 // error-handling

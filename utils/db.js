@@ -1,14 +1,9 @@
-var db = require('knex')({
+let dbConfig = require('./config');
+let db = require('knex')({
     client: 'mysql',
-    connection: {
-        host : 'localhost',
-        user : 'root',
-        password : 'szq1999619',
-        database : 'login'
-    },
-    pool: {
-        min: 0,
-        max: 7
-    },//连接池
-    acquireConnectionTimeout: 10000});//断线重连
+    connection: dbConfig.config.connection,
+    pool: dbConfig.config.pool,
+    acquireConnectionTimeout: dbConfig.config.acquireConnectionTimeout
+});
+
 module.exports = db;
