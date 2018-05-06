@@ -1,15 +1,26 @@
-let Model = require('../utils/model');
-let compModel = new Model('competiton');
+let mongoose = require('../utils/db');
+let Schema = mongoose.Schema;
 
-compModel.getInfo = function(db, title) {
-    return adminModel.get(db, {
-        title: title
-    })
-};
+let competition = new Schema({
+    start_time: {
+        type: String,
+        required: true
+    },
+    final_time: {
+        type: String,
+        required: true
+    },
+    attach_id: {
+        type: [String]
+    },
+    qualification: {
+        type: String,
+        required: true
+    },
+    arrangement: {
+        type: String,
+        required: true
+    }
+});
 
-compModel.getInfo = function(db, title) {
-    return adminModel.put(db, {
-        title: title
-    })
-};
-module.exports = compModel;
+module.exports = mongoose.model('competition', competition);

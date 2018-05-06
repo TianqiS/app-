@@ -1,9 +1,25 @@
 let dbConfig = require('./config');
-let db = require('knex')({
-    client: 'mysql',
-    connection: dbConfig.config.connection,
-    pool: dbConfig.config.pool,
-    acquireConnectionTimeout: dbConfig.config.acquireConnectionTimeout
+let mongoose = require('mongoose');
+let DBUrl = 'mongodb://' + dbConfig.db.host + '/' + dbConfig.db.dbName;
+
+mongoose.connect(DBUrl);
+
+mongoose.connection.on('connected', function () {
+    console.log('Mongoose connection open to ' + DBUrl);
 });
 
-module.exports = db;
+/**
+ * 连接异常
+ */
+mongoose.connection.on('error',function (err) {
+    console.log('Mongoose connection error: ' + err);
+});
+
+/**
+ * 连接断开
+ */
+mongoose.connection.on('disconnected', function () {
+    console.log('Mongoose connection disconnected');
+});
+
+module.exports = mongoose;

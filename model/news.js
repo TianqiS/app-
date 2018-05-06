@@ -1,15 +1,15 @@
 let mongoose = require('../utils/db');
 let Schema = mongoose.Schema;
 
-let admin = new Schema({
-    user_name: {
+let news = new Schema({
+    start_time: {
         type: String,
         required: true
     },
-    password: {
+    end_time: {
         type: String,
         required: true
     }
 });
 
-module.exports = mongoose.model('admin', admin);
+module.exports = news
