@@ -1,7 +1,7 @@
-let mongoose = require('../utils/db');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const Schema = mongoose.Schema;
 
-let competition = new Schema({
+const competition = new Schema({
     start_time: {
         type: String,
         required: true

@@ -1,9 +1,9 @@
-let router = require('koa-router')({
+const router = require('koa-router')({
     prefix: '/common'
 });
-let _ = require('lodash');
-let adminModule = require('../module/admin');
-let md5 = require(('../utils/utils'));
+const _ = require('lodash');
+const adminModule = require('../module/admin');
+const md5 = require(('../utils/utils'));
 // let Joi = require('joi')
 /**
  * 登陆

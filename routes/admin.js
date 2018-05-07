@@ -1,8 +1,8 @@
-let router = require('koa-router') ({
+const router = require('koa-router') ({
     prefix: '/admin'
 });
-let adminModule = require('../module/admin');
-let _ = require('lodash');
+const adminModule = require('../module/admin');
+const _ = require('lodash');
 
 router.post('/addUser', async function(ctx) {
     let info = _.pick(ctx.request.body, ['userName', 'password']);

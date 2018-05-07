@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let advertisement = require('./advertisement');
-let competition = require('./competition');
-let lecture = require('./lecture');
-let news = require('./news');
-let recruit = require('./recruit');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const advertisement = require('./advertisement');
+const competition = require('./competition');
+const lecture = require('./lecture');
+const news = require('./news');
+const recruit = require('./recruit');
 
 

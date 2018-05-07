@@ -1,7 +1,7 @@
-let mongoose = require('../utils/db');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const Schema = mongoose.Schema;
 
-let admin = new Schema({
+const admin = new Schema({
     user_name: {
         type: String,
         required: true

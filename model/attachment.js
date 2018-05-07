@@ -1,7 +1,7 @@
-let mongoose = require('../utils/db');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const Schema = mongoose.Schema;
 
-let attachment = new Schema({
+const attachment = new Schema({
     name: {
         type: String,
         required: true

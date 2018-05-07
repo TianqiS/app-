@@ -1,7 +1,7 @@
-let mongoose = require('../utils/db');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const Schema = mongoose.Schema;
 
-let lecture = new Schema({
+const lecture = new Schema({
     teacher: {
         type: String,
         required: true

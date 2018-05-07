@@ -1,1 +1,1 @@
-let compModel = require('../model/competition');
+const compModel = require('../model/competition');

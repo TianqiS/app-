@@ -1,1 +1,1 @@
-let recruitModel = require('../model/recruit');
+const recruitModel = require('../model/recruit');

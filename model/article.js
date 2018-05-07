@@ -1,8 +1,8 @@
-let mongoose = require('../utils/db');
-let template = require('./template');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const template = require('./template');
+const Schema = mongoose.Schema;
 
-let article = new Schema({
+const article = new Schema({
     title: {
         type: String
     },

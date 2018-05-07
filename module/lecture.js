@@ -1,1 +1,1 @@
-let lectureModel = require('../model/lecture');
+const lectureModel = require('../model/lecture');

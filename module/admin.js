@@ -1,6 +1,6 @@
-let adminModel = require('../model/admin');
-let typeModel = require('../model/type');
-let articleModel = require('../model/article');
+const adminModel = require('../model/admin');
+const typeModel = require('../model/type');
+const articleModel = require('../model/article');
 
 exports.getUserInfo = function(userName) {
     return adminModel.find({user_name: userName})

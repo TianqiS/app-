@@ -1,7 +1,7 @@
-let mongoose = require('../utils/db');
-let Schema = mongoose.Schema;
+const mongoose = require('../utils/db');
+const Schema = mongoose.Schema;
 
-let advertisement = new Schema({
+const advertisement = new Schema({
     attachment_list: {
         type: [Schema.Types.ObjectId]
     }

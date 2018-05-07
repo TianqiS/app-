@@ -1,6 +1,6 @@
-let dbConfig = require('./config');
-let mongoose = require('mongoose');
-let DBUrl = 'mongodb://' + dbConfig.db.host + '/' + dbConfig.db.dbName;
+const dbConfig = require('./config');
+const mongoose = require('mongoose');
+const DBUrl = 'mongodb://' + dbConfig.db.host + '/' + dbConfig.db.dbName;
 
 mongoose.connect(DBUrl);
 
