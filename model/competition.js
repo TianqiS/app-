@@ -23,4 +23,4 @@ const competition = new Schema({
     }
 });
 
-module.exports = mongoose.model('competition', competition);
+module.exports = competition;

@@ -14,7 +14,7 @@ const article = new Schema({
         min: 1,
         max: 6
     },
-    template: [news, lecture],
+    template: template.templateModel,
     create_time: {
         type: Date,
         required: true

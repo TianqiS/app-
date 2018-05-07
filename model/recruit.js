@@ -20,4 +20,4 @@ const recruit = new Schema({
     }
 });
 
-module.exports = mongoose.model('recruit', recruit);
+module.exports = recruit;
