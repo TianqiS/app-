@@ -27,7 +27,7 @@ router.post('/login', async function (ctx) {
     }
 });
 
-router.get('articleList', async function(ctx) {
+router.get('/articleList', async function(ctx) {
     let pageInfo = {};
     let articleType = ctx.query.articleType;
     pageInfo.page = ctx.query.page;

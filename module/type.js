@@ -13,3 +13,19 @@ exports.getTypeList = function() {
         return typeList;
     })
 };
+
+exports.deletePlate = function(plateId) {
+    return typeModel.remove({
+        _id: plateId
+    })
+};
+
+exports.updatePlate = function(plateId, plateInfo) {
+    return typeModel.findOne({
+        _id: plateId
+    }).then(result => {
+        Object.assign(result, plateInfo);
+        console.log(result);
+        result.save();
+    })
+};

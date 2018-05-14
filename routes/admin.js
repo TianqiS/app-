@@ -2,7 +2,8 @@ const router = require('koa-router') ({
     prefix: '/admin'
 });
 const adminModule = require('../module/admin');
-const articleModule = require('../module/article')
+const articleModule = require('../module/article');
+const typeModule = require('../module/type');
 const _ = require('lodash');
 
 router.post('/addUser', async function(ctx) {
@@ -45,6 +46,21 @@ router.post('/deleteArticle', async function (ctx) {
     ctx.body = 'delete success';
 });
 
+router.post('/deletePlate', async function(ctx) {
+    let plateId = ctx.request.body.plateId;
+    await typeModule.deletePlate(plateId);
+
+    ctx.body = 'delete success';
+});
+
+router.post('/updatePlate', async function(ctx) {
+    let plateId = ctx.request.body.plateId;
+    let plateInfo = _.pick(ctx.request.body, ['article_type', 'detail', 'pic_url']);
+
+    await typeModule.updatePlate(plateId, plateInfo);
+
+    ctx.body = 'update success';
+});
 
 
 module.exports = router;

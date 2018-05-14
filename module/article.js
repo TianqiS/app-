@@ -33,9 +33,7 @@ exports.addArticle = function(articleInfo) {
 exports.updateArticle = function(id, query) {
     return articleModel.findOne({_id: id}).then(result => {
         let typeModel = templateMap[query.type];
-        for(let i in result) {
-            result[i] = (query[i] != undefined)? query[i] : result[i];
-        }
+        Object.assign(result, query);
         result.template = new typeModel(query.template);
 
         result.save();
