@@ -6,7 +6,7 @@ const lecture = require('./lecture');
 const news = require('./news');
 const recruit = require('./recruit');
 
-let typeModel = new Schema({}, {discriminatorKey: 'templateType'})
+let typeModel = new Schema({}, {discriminatorKey: 'templateType'});
 
 let template = new Schema({
     type: typeModel

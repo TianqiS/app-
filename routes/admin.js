@@ -27,8 +27,21 @@ router.post('/addArticle', async function (ctx) {
     ctx.body = 'add article success';
 });
 
-router.post('/modifyArticle', async function (ctx) {
+router.post('/updateArticle', async function (ctx) {
+    let articleId = ctx.request.body.articleId;
+    let articleInfo = _.pick(ctx.request.body, ['title', 'context', 'type', 'template']);
 
+    await adminModule.updateArticle(articleId, articleInfo);
+
+    ctx.body = 'modify success';
+});
+
+router.post('/deleteArticle', async function (ctx) {
+    let articleId = ctx.request.body.articleId;
+
+    await adminModule.deleteArticle(articleId);
+
+    ctx.body = 'delete success';
 });
 
 
