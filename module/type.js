@@ -29,3 +29,9 @@ exports.updatePlate = function(plateId, plateInfo) {
         result.save();
     })
 };
+
+exports.getOnePlate = function(plateId) {
+    return typeModel.findOne({
+        _id: plateId
+    })
+};

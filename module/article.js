@@ -56,4 +56,9 @@ exports.getArticleList = function(articleType, pageInfo) {
     }).skip(pageNumber).limit(perPage);
 };
 
+exports.getOneArticle = function(articleId) {
+    return articleModel.findOne({
+        _id: articleId
+    })
+};
 

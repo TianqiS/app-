@@ -27,7 +27,7 @@ router.post('/login', async function (ctx) {
     }
 });
 
-router.get('/articleList', async function(ctx) {
+router.get('/articleList', async function (ctx) {
     let pageInfo = {};
     let articleType = ctx.query.articleType;
     pageInfo.page = ctx.query.page;
@@ -38,8 +38,24 @@ router.get('/articleList', async function(ctx) {
     ctx.body = result;
 });
 
-router.get('/plateList', async function(ctx) {
+router.get('/plateList', async function (ctx) {
     let result = await typeModule.getTypeList();
+
+    ctx.body = result;
+});
+
+router.get('/getOnePlate', async function (ctx) {
+    let plateId = ctx.request.query.plateId;
+    let result = await typeModule.getOnePlate(plateId);
+
+    console.log(result);
+    ctx.body = result;
+});
+
+router.get('/getOneArticle', async function (ctx) {
+    let articleId = ctx.request.query.articleId;
+
+    let result = await articleModule.getOneArticle(articleId);
 
     ctx.body = result;
 });
