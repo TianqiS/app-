@@ -14,6 +14,9 @@ const type = new Schema({
     },
     detail: {
         type: String
+    },
+    pic_url: {
+        type: String
     }
 });
 

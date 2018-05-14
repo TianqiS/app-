@@ -3,6 +3,8 @@ const router = require('koa-router')({
 });
 const _ = require('lodash');
 const adminModule = require('../module/admin');
+const articleModule = require('../module/article');
+const typeModule = require('../module/type');
 const md5 = require(('../utils/utils'));
 // let Joi = require('joi')
 /**
@@ -26,8 +28,21 @@ router.post('/login', async function (ctx) {
 });
 
 router.get('articleList', async function(ctx) {
-    let articleType = ctx.query.type;
+    let pageInfo = {};
+    let articleType = ctx.query.articleType;
+    pageInfo.page = ctx.query.page;
+    pageInfo.perPage = ctx.query.perPage;
 
+    let result = await articleModule.getArticleList(articleType, pageInfo);
+
+    ctx.body = result;
 });
+
+router.get('/plateList', async function(ctx) {
+    let result = await typeModule.getTypeList();
+
+    ctx.body = result;
+});
+
 
 module.exports = router;
