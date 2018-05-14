@@ -1,8 +1,12 @@
 const mongoose = require('../utils/db');
 const Schema = mongoose.Schema;
+const Model = require('../utils/Model');
 
 const type = new Schema({
-    type_id: {
+    _id: {
+        type: Number
+    },
+    seq: {
         type: Number
     },
     article_type: {
@@ -13,4 +17,4 @@ const type = new Schema({
     }
 });
 
-module.exports = mongoose.model('type', type);
+module.exports = new Model('type', type).getModel();

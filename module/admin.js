@@ -15,7 +15,7 @@ exports.addUser = function(info) {
 };
 
 exports.addArticleType = function(typeInfo) {
-    return typeModel.create({
+    return typeModel.insertValue({
         article_type: typeInfo.articleType,
         detail: typeInfo.detail
     })
@@ -35,7 +35,7 @@ exports.addArticle = function(articleInfo) {
         type: articleInfo.type,
         create_time: new Date()
     }).then(result => {
-        let typeModel = templateMap[articleInfo.type]
+        let typeModel = templateMap[articleInfo.type];
         result.template = new typeModel(articleInfo.template);
         result.save();
     })

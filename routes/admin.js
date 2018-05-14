@@ -27,6 +27,10 @@ router.post('/addArticle', async function (ctx) {
     ctx.body = 'add article success';
 });
 
+router.post('/modifyArticle', async function (ctx) {
+
+});
+
 
 
 module.exports = router;

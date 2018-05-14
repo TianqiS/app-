@@ -1,8 +1,15 @@
 const mongoose = require('../utils/db');
 const template = require('./template');
 const Schema = mongoose.Schema;
+const Model = require('../utils/Model');
 
 const article = new Schema({
+    _id: {
+        type: Number
+    },
+    seq: {
+        type: Number
+    },
     title: {
         type: String
     },
@@ -24,4 +31,4 @@ const article = new Schema({
     }
 });
 
-module.exports = mongoose.model('article', article);
+module.exports = new Model('article', article).getModel();

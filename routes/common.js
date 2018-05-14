@@ -25,7 +25,9 @@ router.post('/login', async function (ctx) {
     }
 });
 
-router.get('/postArticle', async function(ctx) {
+router.get('articleList', async function(ctx) {
+    let articleType = ctx.query.type;
 
 });
+
 module.exports = router;
