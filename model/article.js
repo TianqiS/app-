@@ -23,7 +23,7 @@ const article = new Schema({
     },
     template: template.templateModel,
     create_time: {
-        type: Date,
+        type: String,
         required: true
     },
     update_time: {

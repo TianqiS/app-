@@ -60,5 +60,13 @@ router.get('/getOneArticle', async function (ctx) {
     ctx.body = result;
 });
 
+router.get('/searchArticle', async function(ctx) {
+    let keyword = ctx.request.query.keyword;
+    let time = ctx.request.query.time;
+
+    let article = await articleModule.searchArticle(keyword, time);
+
+    ctx.body = article;
+});
 
 module.exports = router;
