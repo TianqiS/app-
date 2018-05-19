@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "debug": "^2.6.3",
+    "js-base64": "^2.4.3",
     "knex": "^0.14.4",
     "koa": "^2.2.0",
+    "koa-body": "^2.5.0",
     "koa-bodyparser": "^3.2.0",
     "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
@@ -22,7 +24,9 @@
     "koa-views": "^5.2.1",
     "md5": "^2.2.1",
     "mongoose": "^5.0.15",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "qiniu": "^7.1.5",
+    "request": "^2.86.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"

@@ -5,7 +5,7 @@ const _ = require('lodash');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
 const typeModule = require('../module/type');
-const md5 = require(('../utils/utils'));
+const utils = require('../utils/utils');
 // let Joi = require('joi')
 /**
  * 登陆
@@ -16,7 +16,7 @@ router.post('/login', async function (ctx) {
 
     let userInfo = await adminModule.getUserInfo(info.username);
 
-    let real_password = md5(info.password);
+    let real_password = utils.md5(info.password);
 
     if (real_password != userInfo.password) throw new Error('用户名密码错误');
 
@@ -68,5 +68,7 @@ router.get('/searchArticle', async function(ctx) {
 
     ctx.body = article;
 });
+
+
 
 module.exports = router;

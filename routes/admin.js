@@ -1,10 +1,13 @@
 const router = require('koa-router') ({
     prefix: '/admin'
 });
+const koaBody = require('koa-body');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
 const typeModule = require('../module/type');
 const _ = require('lodash');
+const utils = require('../utils/utils');
+const qiniu = require('../utils/qiniu');
 
 router.post('/addUser', async function(ctx) {
     let info = _.pick(ctx.request.body, ['userName', 'password']);
@@ -60,6 +63,13 @@ router.post('/updatePlate', async function(ctx) {
     await typeModule.updatePlate(plateId, plateInfo);
 
     ctx.body = 'update success';
+});
+
+router.post('/upload',koaBody({multipart: true}), async function(ctx) {
+    let file = ctx.request.body.files.file;
+    let result = await qiniu.qiniuUpload(file.path);
+
+    ctx.body = result;
 });
 
 
