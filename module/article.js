@@ -28,7 +28,8 @@ let formatDateTime = function (inputTime) {
 exports.addArticleType = function (typeInfo) {
     return typeModel.insertValue({
         article_type: typeInfo.articleType,
-        detail: typeInfo.detail
+        detail: typeInfo.detail,
+        pic_url: typeInfo.picUrl
     })
 };
 

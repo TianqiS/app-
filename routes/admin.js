@@ -17,9 +17,9 @@ router.post('/addUser', async function(ctx) {
 });
 
 router.post('/addArticleType', async function(ctx) {
-    let typeInfo = _.pick(ctx.request.body, ['articleType', 'detail']);
+    let typeInfo = _.pick(ctx.request.body, ['articleType', 'detail', 'picUrl']);
 
-    await articleModule.addArticleType(typeInfo)
+    await articleModule.addArticleType(typeInfo);
 
     ctx.body = 'add success';
 });
