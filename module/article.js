@@ -1,6 +1,7 @@
 const typeModel = require('../model/type');
 const articleModel = require('../model/article');
 const template = require('../model/template');
+const attachmentModel = require('../model/attachment');
 const templateMap = {
     "1": template.advertisementModel,
     "2": template.competitionModel,
@@ -29,17 +30,17 @@ exports.addArticleType = function (typeInfo) {
     return typeModel.insertValue({
         article_type: typeInfo.articleType,
         detail: typeInfo.detail,
-        pic_url: typeInfo.picUrl
+        pic_url: typeInfo.pic_url
     })
 };
 
 exports.addArticle = function (articleInfo) {
-
     return articleModel.insertValue({
         title: articleInfo.title,
         context: articleInfo.context,
         type: articleInfo.type,
-        create_time: formatDateTime(new Date())
+        create_time: formatDateTime(new Date()),
+        pic_url: articleInfo.pic_url
     }).then(result => {
         let typeModel = templateMap[articleInfo.type];
         result.template = new typeModel(articleInfo.template);
@@ -49,18 +50,27 @@ exports.addArticle = function (articleInfo) {
 
 exports.updateArticle = function (id, query) {
     return articleModel.findOne({_id: id}).then(result => {
-        let typeModel = templateMap[query.type];
-        Object.assign(result, query);
-        result.template = new typeModel(query.template);
-        result.update_time = new Date();
-
-        result.save();
+        return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
+            if (query.pic_url) {
+                return attachment.remove();
+            }
+        }).then(() => {
+            let typeModel = templateMap[query.type];
+            Object.assign(result, query);
+            result.template = new typeModel(query.template);
+            result.update_time = new Date();
+            result.save();
+        })
     })
 };
 
 exports.deleteArticle = function (articleId) {
-    return articleModel.remove({
+    return articleModel.findOne({
         _id: articleId
+    }).then(result => {
+        return attachmentModel.remove({_id: result.pic_url}).then(()=> {
+            result.remove();
+        })
     })
 };
 

@@ -1,4 +1,5 @@
 const typeModel = require('../model/type');
+const attachmentModel = require('../model/attachment');
 
 exports.getTypeList = function() {
     let typeList = [];
@@ -15,8 +16,12 @@ exports.getTypeList = function() {
 };
 
 exports.deletePlate = function(plateId) {
-    return typeModel.remove({
+    return typeModel.findOne({
         _id: plateId
+    }).then(result => {
+        return attachmentModel.remove({_id: result.pic_url}).then(() => {
+            result.remove();
+        })
     })
 };
 
@@ -24,9 +29,13 @@ exports.updatePlate = function(plateId, plateInfo) {
     return typeModel.findOne({
         _id: plateId
     }).then(result => {
-        Object.assign(result, plateInfo);
-        console.log(result);
-        result.save();
+        return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
+            if(plateInfo.pic_url) return attachment.remove();
+        }).then(() => {
+            Object.assign(result, plateInfo);
+            result.save();
+        })
+
     })
 };
 

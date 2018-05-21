@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const advertisement = new Schema({
     attachment_list: {
-        type: [Schema.Types.ObjectId]
+        type: [Number]
     }
 });
 

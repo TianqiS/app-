@@ -28,6 +28,9 @@ const article = new Schema({
     },
     update_time: {
         type: Date
+    },
+    pic_url: {
+        type: Number
     }
 });
 

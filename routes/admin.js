@@ -6,9 +6,7 @@ const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
 const typeModule = require('../module/type');
 const _ = require('lodash');
-const utils = require('../utils/utils');
-const qiniu = require('../utils/qiniu');
-
+const attachmentModule = require('../module/attachment');
 router.post('/addUser', async function(ctx) {
     let info = _.pick(ctx.request.body, ['userName', 'password']);
 
@@ -17,7 +15,7 @@ router.post('/addUser', async function(ctx) {
 });
 
 router.post('/addArticleType', async function(ctx) {
-    let typeInfo = _.pick(ctx.request.body, ['articleType', 'detail', 'picUrl']);
+    let typeInfo = _.pick(ctx.request.body, ['articleType', 'detail', 'pic_url']);
 
     await articleModule.addArticleType(typeInfo);
 
@@ -25,7 +23,7 @@ router.post('/addArticleType', async function(ctx) {
 });
 
 router.post('/addArticle', async function (ctx) {
-    let articleInfo = _.pick(ctx.request.body, ['title', 'context', 'type', 'template']);
+    let articleInfo = _.pick(ctx.request.body, ['title', 'context', 'type', 'template', 'pic_url']);
 
     await articleModule.addArticle(articleInfo);
 
@@ -34,7 +32,7 @@ router.post('/addArticle', async function (ctx) {
 
 router.post('/updateArticle', async function (ctx) {
     let articleId = ctx.request.body.articleId;
-    let articleInfo = _.pick(ctx.request.body, ['title', 'context', 'type', 'template']);
+    let articleInfo = _.pick(ctx.request.body, ['title', 'context', 'type', 'template', 'pic_url']);
 
     await articleModule.updateArticle(articleId, articleInfo);
 
@@ -67,7 +65,7 @@ router.post('/updatePlate', async function(ctx) {
 
 router.post('/upload',koaBody({multipart: true}), async function(ctx) {
     let file = ctx.request.body.files.file;
-    let result = await qiniu.qiniuUpload(file.path);
+    let result = await attachmentModule.uploadAttachment(file.path);
 
     ctx.body = result;
 });

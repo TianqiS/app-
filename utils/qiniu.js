@@ -8,7 +8,7 @@ let getUploadToken = function() {
     let bucket = config.qiniu.bucket;
     let options = {
         scope: bucket,
-        returnBody: '{"url": "http://p8s2ad26k.bkt.clouddn.com/$(key)?imageView2/0/format/jpg/q/75|imageslim"}'
+        returnBody: '{"url": "http://p8s2ad26k.bkt.clouddn.com/$(key)?imageView2/0/format/jpg/q/75|imageslim", "key": "$(key)"}'
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);
     let uploadToken = putpolicy.uploadToken(mac);
