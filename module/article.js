@@ -76,8 +76,8 @@ exports.deleteArticle = function (articleId) {
 };
 
 exports.getArticleList = function (articleType, pageInfo) {
-    let page = pageInfo.page || 1;
-    let perPage = pageInfo.perPage || 10;
+    let page = pageInfo.page * 1|| 1;
+    let perPage = pageInfo.perPage * 1 || 10;
     let pageNumber = (page - 1) * perPage;
 
     return articleModel.find({
