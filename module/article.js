@@ -26,6 +26,14 @@ let formatDateTime = function (inputTime) {
     return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 };
 
+function replaceUrl(originObject) {
+    originObject = originObject.toObject();
+    return attachmentModel.findOne({_id: originObject.pic_url}).then(attachment => {
+        originObject.pic_url = attachment.attachment_url;
+        return originObject;
+    })
+}
+
 exports.addArticleType = function (typeInfo) {
     return typeModel.insertValue({
         article_type: typeInfo.articleType,
@@ -78,31 +86,55 @@ exports.getArticleList = function (articleType, pageInfo) {
     let page = pageInfo.page || 1;
     let perPage = pageInfo.perPage || 10;
     let pageNumber = (page - 1) * perPage;
+    return new Promise(function(resolve, reject) {
+        return articleModel.find({
+            type: articleType
+        }).skip(pageNumber).limit(perPage).then(articleList => {
+            let promiseList = [];
+            articleList.forEach(e => {
+                promiseList.push(replaceUrl(e));
+            });
+            return Promise.all(promiseList).then(result => {
+                resolve(result);
+            })
+        });
+    });
 
-    return articleModel.find({
-        type: articleType
-    }).skip(pageNumber).limit(perPage);
+
 };
 
 exports.getOneArticle = function (articleId) {
     return articleModel.findOne({
         _id: articleId
+    }).then(result => {
+        return replaceUrl(result)
     })
 };
 
 exports.searchArticle = function (keyword, time) {
     let wordReg = new RegExp(keyword, 'i');
     let timeReg = new RegExp(time, 'i');
-    return articleModel.find({
-        create_time: {$regex: timeReg},
-        $or: [
-            {
-                title: {$regex: wordReg}
-            },
-            {
-                context: {$regex: wordReg}
-            }
-        ]
-    })
+    let promiseList = [];
+    return new Promise(function(resolve, reject) {
+        return articleModel.find({
+            create_time: {$regex: timeReg},
+            $or: [
+                {
+                    title: {$regex: wordReg}
+                },
+                {
+                    context: {$regex: wordReg}
+                }
+            ]
+        }).then(articleList => {
+            articleList.forEach(e => {
+                promiseList.push(replaceUrl(e));
+            });
+            Promise.all(promiseList).then(result => {
+                resolve(result)
+            })
+        })
+    });
+
 };
 

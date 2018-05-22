@@ -1,18 +1,29 @@
 const typeModel = require('../model/type');
 const attachmentModel = require('../model/attachment');
 
-exports.getTypeList = function() {
-    let typeList = [];
-    return typeModel.find({}).then(result => {
-        result.forEach((e, i) => {
-            if(i != 0) {
-                e = e.toObject();
-                delete e.__v;
-                typeList.push(e);
-            }
-        });
-        return typeList;
+function replaceUrl(originObject) {
+    originObject = originObject.toObject();
+    return attachmentModel.findOne({_id: originObject.pic_url}).then(attachment => {
+        originObject.pic_url = attachment.attachment_url;
+        return originObject;
     })
+}
+
+exports.getTypeList = function() {
+    let promiseList = [];
+    return new Promise(function(resolve, reject) {
+        return typeModel.find({}).then(result => {
+            result.forEach((e, i) => {
+                if(i != 0) {
+                    promiseList.push(replaceUrl(e));
+                }
+            });
+            return Promise.all(promiseList).then(result => {
+                resolve(result);
+            })
+        })
+    });
+
 };
 
 exports.deletePlate = function(plateId) {
@@ -42,5 +53,7 @@ exports.updatePlate = function(plateId, plateInfo) {
 exports.getOnePlate = function(plateId) {
     return typeModel.findOne({
         _id: plateId
+    }).then(plate => {
+        return replaceUrl(plate);
     })
 };
