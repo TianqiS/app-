@@ -31,6 +31,22 @@ function replaceUrl(originObject) {
     return attachmentModel.findOne({_id: originObject.pic_url}).then(attachment => {
         originObject.pic_url = attachment.attachment_url;
         return originObject;
+    }).then(originObject => {
+        if(originObject.type ==2) {
+            let pic_url = [];
+            return new Promise(function(resolve, reject) {
+                originObject.attachment_list.forEach((e, i) => {
+                    attachmentModel.findOne({_id: e}).then(result => {
+                        pic_url.push(result.attachment_url);
+                    })
+                    if(i == originObject.attachment_list.length) {
+                        originObject.attachment_list = pic_url;
+                        return resolve(originObject);
+                    }
+                })
+            });
+        }
+        return originObject;
     })
 }
 
