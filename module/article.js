@@ -2,6 +2,7 @@ const typeModel = require('../model/type');
 const articleModel = require('../model/article');
 const template = require('../model/template');
 const attachmentModel = require('../model/attachment');
+const advertisement = require('../model/advertisement');
 const templateMap = {
     "1": template.advertisementModel,
     "2": template.competitionModel,
@@ -81,13 +82,19 @@ exports.getArticleList = function (articleType, pageInfo) {
 
     return articleModel.find({
         type: articleType
-    }).skip(pageNumber).limit(perPage);
+    }).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
+        path: 'template.attachment_list',
+        model: 'attachment'
+    }).populate({
+        path: 'template.attach_id',
+        model: 'attachment'
+    })
 };
 
 exports.getOneArticle = function (articleId) {
     return articleModel.findOne({
         _id: articleId
-    })
+    }).populate('pic_url', 'attachment_url');
 };
 
 exports.searchArticle = function (keyword, time) {
@@ -103,6 +110,6 @@ exports.searchArticle = function (keyword, time) {
                 context: {$regex: wordReg}
             }
         ]
-    })
+    }).populate('pic_url', 'attachment_url');
 };
 

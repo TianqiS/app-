@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const advertisement = new Schema({
     attachment_list: {
-        type: [Number]
+        type: [Number],
+        ref: 'attachment'
     }
 });
 

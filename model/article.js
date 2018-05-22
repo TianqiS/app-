@@ -30,7 +30,8 @@ const article = new Schema({
         type: Date
     },
     pic_url: {
-        type: Number
+        type: Number,
+        ref: 'attachment'
     }
 });
 

@@ -16,7 +16,8 @@ const type = new Schema({
         type: String
     },
     pic_url: {
-        type: String
+        type: Number,
+        ref: 'attachment'
     }
 });
 

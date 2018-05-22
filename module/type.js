@@ -2,17 +2,7 @@ const typeModel = require('../model/type');
 const attachmentModel = require('../model/attachment');
 
 exports.getTypeList = function() {
-    let typeList = [];
-    return typeModel.find({}).then(result => {
-        result.forEach((e, i) => {
-            if(i != 0) {
-                e = e.toObject();
-                delete e.__v;
-                typeList.push(e);
-            }
-        });
-        return typeList;
-    })
+    return typeModel.find({_id: {$ne: 0}}).populate('pic_url', 'attachment_url');
 };
 
 exports.deletePlate = function(plateId) {
@@ -42,5 +32,5 @@ exports.updatePlate = function(plateId, plateInfo) {
 exports.getOnePlate = function(plateId) {
     return typeModel.findOne({
         _id: plateId
-    })
+    }).populate('pic_url', 'attachment_url')
 };
