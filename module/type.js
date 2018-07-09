@@ -15,14 +15,14 @@ exports.deletePlate = function(plateId) {
     })
 };
 
-exports.updatePlate = function(plateId, plateInfo) {
+exports.updatePlate = function(plateInfo) {
     return typeModel.findOne({
-        _id: plateId
+        _id: plateInfo.plateId
     }).then(result => {
         return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
             if(plateInfo.pic_url) return attachment.remove();
         }).then(() => {
-            Object.assign(result, plateInfo);
+            Object.assign(plateInfo);
             result.save();
         })
 

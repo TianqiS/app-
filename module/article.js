@@ -49,8 +49,8 @@ exports.addArticle = function (articleInfo) {
     })
 };
 
-exports.updateArticle = function (id, query) {
-    return articleModel.findOne({_id: id}).then(result => {
+exports.updateArticle = function (query) {
+    return articleModel.findOne({_id: query.articleId}).then(result => {
         return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
             if (query.pic_url) {
                 return attachment.remove();

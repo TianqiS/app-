@@ -5,8 +5,10 @@ const _ = require('lodash');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
 const typeModule = require('../module/type');
-const utils = require('../utils/utils');
-// let Joi = require('joi')
+const Joi = require('joi');
+const Extension = require('joi-date-extensions');
+const JoiDate = Joi.extend(Extension);
+const session = require("koa-session2");
 /**
  * 登陆
  * 参数：userName, password
@@ -18,13 +20,13 @@ router.post('/login', async function (ctx) {
 
     let real_password = utils.md5(info.password);
 
-    if (real_password != userInfo.password) throw new Error('用户名密码错误');
-
+    if (real_password !== userInfo.password) throw 40002;
     ctx.body = {
         status: 'success',
         message: '登录成功',
         session: ctx.session,
-    }
+    };
+    ctx.session.type = 'admin'
 });
 
 router.get('/articleList', async function (ctx) {
@@ -32,6 +34,16 @@ router.get('/articleList', async function (ctx) {
     let articleType = ctx.query.articleType;
     pageInfo.page = ctx.query.page;
     pageInfo.perPage = ctx.query.perPage;
+
+    let schema = {
+        articleType: Joi.string(),
+        page: Joi.number(),
+        perPage: Joi.number()
+    };
+
+    Joi.validate(Object.assign({"articleType": articleType}, pageInfo), schema, function(err) {
+        if(err) throw 40001;
+    });
 
     let result = await articleModule.getArticleList(articleType, pageInfo);
 
@@ -46,14 +58,32 @@ router.get('/plateList', async function (ctx) {
 
 router.get('/getOnePlate', async function (ctx) {
     let plateId = ctx.request.query.plateId;
+
+    let schema = {
+        plateId : Joi.number()
+    };
+
+    Joi.validate(plateId,schema,function (err) {
+        if(err) throw 40001;
+    });
+
     let result = await typeModule.getOnePlate(plateId);
 
     console.log(result);
+
     ctx.body = result;
 });
 
 router.get('/getOneArticle', async function (ctx) {
     let articleId = ctx.request.query.articleId;
+
+    let schema = {
+        articleId : Joi.number()
+    };
+
+    Joi.validate(articleId,schema,function (err) {
+        if(err) throw 40001;
+    });
 
     let result = await articleModule.getOneArticle(articleId);
 
@@ -63,6 +93,15 @@ router.get('/getOneArticle', async function (ctx) {
 router.get('/searchArticle', async function(ctx) {
     let keyword = ctx.request.query.keyword;
     let time = ctx.request.query.time;
+
+    schema = {
+        keyword : JoiDate.string(),
+        time :JoiDate.date().format('YYYY-MM-DD')
+    };
+
+    JoiDate.validate(ctx,schema,function (err) {
+        if(err) throw 40001;
+    });
 
     let article = await articleModule.searchArticle(keyword, time);
 
