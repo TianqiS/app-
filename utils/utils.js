@@ -28,7 +28,11 @@ exports.errHandle = async function (ctx, next) {
                 };
             }
         } else {
-            console.error(err);
+              ctx.status = 403;
+              ctx.body = {
+                  status: 'error',
+                  msg: errorList[40004]
+              }
         }
     }
 };

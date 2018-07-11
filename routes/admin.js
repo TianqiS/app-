@@ -88,7 +88,7 @@ router.post('/deleteArticle', async function (ctx) {
         articleId : Joi.number(),
     };
 
-    Joi.validate(articleId, schema, function(err) {
+    Joi.validate({"articleId":articleId}, schema, function(err) {
         if(err) throw 40001;
     });
 
@@ -102,7 +102,7 @@ router.post('/deletePlate', async function(ctx) {
     let schema ={
         plateId : Joi.number(),
     };
-    Joi.validate(plateId, schema, function(err) {
+    Joi.validate({"plateId":plateId}, schema, function(err) {
         if(err) throw 40001;
     });
     await typeModule.deletePlate(plateId);

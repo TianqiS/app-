@@ -2,7 +2,6 @@ const typeModel = require('../model/type');
 const articleModel = require('../model/article');
 const template = require('../model/template');
 const attachmentModel = require('../model/attachment');
-const advertisement = require('../model/advertisement');
 const templateMap = {
     "1": template.advertisementModel,
     "2": template.competitionModel,
@@ -46,6 +45,8 @@ exports.addArticle = function (articleInfo) {
         let typeModel = templateMap[articleInfo.type];
         result.template = new typeModel(articleInfo.template);
         result.save();
+    }).catch(err => {
+        if (err) throw 40003;
     })
 };
 
@@ -61,6 +62,8 @@ exports.updateArticle = function (query) {
             result.template = new typeModel(query.template);
             result.update_time = new Date();
             result.save();
+        }).catch(err => {
+            if (err) throw 40003;
         })
     })
 };
@@ -69,8 +72,10 @@ exports.deleteArticle = function (articleId) {
     return articleModel.findOne({
         _id: articleId
     }).then(result => {
-        return attachmentModel.remove({_id: result.pic_url}).then(()=> {
+        return attachmentModel.remove({_id: result. pic_url}).then(()=> {
             result.remove();
+        }).catch(err => {
+            if (err) throw 40003;
         })
     })
 };

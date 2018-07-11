@@ -14,7 +14,15 @@ const JoiDate = Joi.extend(Extension);
  * 参数：userName, password
  */
 router.post('/login', async function (ctx) {
-    let info = _.pick(ctx.request.body, ['userName', 'password']);
+    let info = _.pick(ctx.request.body, ['username', 'password']);
+
+    let schema = {
+        username : Joi.string().alphanum().min(3).max(30).required(),
+        password : Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    };
+    Joi.validate(info,schema,function (err) {
+        if(err) throw 40001;
+    });
 
     let userInfo = (await adminModule.getUserInfo(info.userName))[0];
 
@@ -36,7 +44,7 @@ router.get('/articleList', async function (ctx) {
     pageInfo.perPage = ctx.query.perPage;
 
     let schema = {
-        articleType: Joi.string(),
+        articleType: Joi.number(),
         page: Joi.number(),
         perPage: Joi.number()
     };
@@ -63,7 +71,7 @@ router.get('/getOnePlate', async function (ctx) {
         plateId : Joi.number()
     };
 
-    Joi.validate(plateId,schema,function (err) {
+    Joi.validate({"plateId": plateId},schema,function (err) {
         if(err) throw 40001;
     });
 
@@ -76,12 +84,11 @@ router.get('/getOnePlate', async function (ctx) {
 
 router.get('/getOneArticle', async function (ctx) {
     let articleId = ctx.request.query.articleId;
-
     let schema = {
         articleId : Joi.number()
     };
 
-    Joi.validate(articleId,schema,function (err) {
+    Joi.validate({"articleId":articleId},schema,function (err) {
         if(err) throw 40001;
     });
 
@@ -94,7 +101,7 @@ router.get('/searchArticle', async function(ctx) {
     let keyword = ctx.request.query.keyword;
     let time = ctx.request.query.time;
 
-    schema = {
+    let schema = {
         keyword : JoiDate.string(),
         time :JoiDate.date().format('YYYY-MM-DD')
     };
