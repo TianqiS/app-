@@ -1,5 +1,14 @@
 const md5 = require('md5');
 const errorList = require('../error.json');
+const koaSession = require("koa-session2");
+const sessionStore = require('./sessionStore');
+const mongoose = require('./db');
+const sessionStoreInstance = new sessionStore({
+    connection: mongoose,     // 数据库链接实例
+    expires: 86400, // 默认时间为1天
+    name: 'session' // 保存session的表名称
+});
+
 
 exports.md5 = function (password) {
     return md5(password);
@@ -38,4 +47,12 @@ exports.isLogin = async function (ctx, next) {
     } else {
         await next();
     }
+};
+
+exports.session = function() {
+    return koaSession({
+        key: 'koa:sess',
+        maxAge: 86400000,
+        store: sessionStoreInstance
+    })
 };

@@ -2,13 +2,13 @@ const router = require('koa-router')({
     prefix: '/common'
 });
 const _ = require('lodash');
+const Joi = require('joi');
+const Extension = require('joi-date-extensions');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
 const typeModule = require('../module/type');
-const Joi = require('joi');
-const Extension = require('joi-date-extensions');
+const utils = require('../utils/utils');
 const JoiDate = Joi.extend(Extension);
-const session = require("koa-session2");
 /**
  * 登陆
  * 参数：userName, password
@@ -16,11 +16,11 @@ const session = require("koa-session2");
 router.post('/login', async function (ctx) {
     let info = _.pick(ctx.request.body, ['userName', 'password']);
 
-    let userInfo = await adminModule.getUserInfo(info.username);
+    let userInfo = (await adminModule.getUserInfo(info.userName))[0];
 
-    let real_password = utils.md5(info.password);
+    let password = utils.md5(info.password);
 
-    if (real_password !== userInfo.password) throw 40002;
+    if (password !== userInfo.password) throw 40002;
     ctx.body = {
         status: 'success',
         message: '登录成功',

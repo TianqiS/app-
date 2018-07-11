@@ -6,7 +6,6 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const db = require('./utils/db');
 const utils =  require('./utils/utils');
-const session = require("koa-session2");
 
 global.db = db;
 
@@ -14,7 +13,7 @@ const admin = require('./routes/admin')
 const users = require('./routes/users')
 const common = require('./routes/common')
 
-
+app.keys = ['management'];
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
@@ -39,7 +38,7 @@ app.use(async (ctx, next) => {
 //error handle
 app.use(utils.errHandle);
 
-app.use(session());
+app.use(utils.session());
 //login
 // app.use(utils.isLogin);
 
