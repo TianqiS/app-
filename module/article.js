@@ -43,7 +43,10 @@ exports.addArticle = function (articleInfo) {
         pic_url: articleInfo.pic_url
     }).then(result => {
         let typeModel = templateMap[articleInfo.type];
-        result.template = new typeModel(articleInfo.template);
+        result.template =  {};
+        if(!!typeModel) {
+            result.template = new typeModel(articleInfo.template);
+        }
         result.save();
     }).catch(err => {
         if (err) throw 40003;
