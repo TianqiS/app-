@@ -88,9 +88,10 @@ exports.getArticleList = function (articleType, pageInfo) {
     let perPage = pageInfo.perPage * 1 || 10;
     let pageNumber = (page - 1) * perPage;
 
+
     return articleModel.find({
         type: articleType
-    }).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
+    }).sort({'_id': -1}).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
         path: 'template.attachment_list',
         model: 'attachment'
     }).populate({
