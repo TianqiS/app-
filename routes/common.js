@@ -14,17 +14,18 @@ const JoiDate = Joi.extend(Extension);
  * 参数：userName, password
  */
 router.post('/login', async function (ctx) {
-    let info = _.pick(ctx.request.body, ['username', 'password']);
+    let info = _.pick(ctx.request.body, ['userName', 'password']);
 
     let schema = {
-        username : Joi.string().alphanum().min(3).max(30).required(),
-        password : Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+        userName : Joi.string().alphanum().min(3).max(30).required(),
+        password : Joi.string().regex(/^[a-zA-Z0-9]*$/),
     };
     Joi.validate(info,schema,function (err) {
         if(err) throw 40001;
     });
 
     let userInfo = (await adminModule.getUserInfo(info.userName))[0];
+    if(!userInfo) throw 40005;
 
     let password = utils.md5(info.password);
 

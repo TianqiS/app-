@@ -21,7 +21,7 @@ exports.errHandle = async function (ctx, next) {
         if (typeof err === 'number') {
             if ((err + '').length === 3) ctx.status = err;
             else {
-                ctx.status = 400;
+                ctx.status = 403;
                 ctx.body = {
                     status: 'error',
                     msg: errorList[err] //errorList.error

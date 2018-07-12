@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/button.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./js/jquery.js"></script>
+</head>
+<body>
+<div class="mainContainer">
+    <div class="header">
+        <div class="errorTip">账号或密码错误</div>
+    </div>
+    <div class="inputForm">
+        <div class="inforInput">
+            <div class="userName">
+                <input name="userName" type="text" placeholder="用户名">
+            </div>
+            <div class="password">
+                <input name="password" type="password" placeholder="密码">
+            </div>
+        </div>
+    </div>
+    <div class="signIn">
+        <a class="button button-glow button-rounded button-highlight">登录</a>
+    </div>
+</div>
+<script>
+    $(function () {
+        var $signIn = $('.signIn');
+        var $errorTip = $('.errorTip');
+
+        function warning(text) {
+            $errorTip.text(text).removeClass('active');
+            setTimeout(function () {
+                $errorTip.addClass('active')
+            }, 100);
+        }
+
+        $signIn.on('click', function () {
+            var userName = $('input[name = userName]').val();
+            var password = $('input[name = password]').val();
+
+            if (!userName || !password) {
+                warning('用户名或密码不正确');
+            } else {
+                var $this = $(this);
+                $this.addClass('disabled');
+
+                $.ajax({
+                    url: '../common/login',
+                    method: 'post',
+                    data: {
+                        "userName": userName,
+                        "password": password
+                    },
+                    success: function (data) {
+                        window.location.href = 'http://www.baidu.com'
+                    },
+                    error: function(data) {
+                        warning(data.responseJSON.msg);
+                    },
+                    complete: function () {
+                        $this.removeClass('disabled');
+                    }
+                })
+            }
+        })
+    })
+</script>
+</body>
+</html>
