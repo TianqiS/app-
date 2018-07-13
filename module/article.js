@@ -2,6 +2,7 @@ const typeModel = require('../model/type');
 const articleModel = require('../model/article');
 const template = require('../model/template');
 const attachmentModel = require('../model/attachment');
+
 const templateMap = {
     "1": template.advertisementModel,
     "2": template.competitionModel,
@@ -31,6 +32,9 @@ exports.addArticleType = function (typeInfo) {
         article_type: typeInfo.articleType,
         detail: typeInfo.detail,
         pic_url: typeInfo.pic_url
+    }).catch(err => {
+        console.log(err);
+        if (err) throw 40003;
     })
 };
 
