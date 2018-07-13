@@ -64,7 +64,7 @@ router.post('/addArticle', async function (ctx) {
 
 router.post('/updateArticle', async function (ctx) {
 
-    let articleInfo = _.pick(ctx.request.body, ['articleId','title', 'context', 'type', 'template', 'pic_url']);
+    let articleInfo = _.pick(ctx.request.body, ['articleId', 'title', 'context', 'type', 'template', 'pic_url']);
 
     let schema = {
         articleId: Joi.number(),
@@ -113,7 +113,7 @@ router.post('/deletePlate', async function(ctx) {
 
 router.post('/updatePlate', async function(ctx) {
     //let plateId = ctx.request.body.plateId;
-    let plateInfo = _.pick(ctx.request.body, ['plateId','article_type', 'detail', 'pic_url']);
+    let plateInfo = _.pick(ctx.request.body, ['plateId', 'article_type', 'detail', 'pic_url']);
 
     let schema = {
         plateId: Joi.number(),
@@ -133,7 +133,8 @@ router.post('/updatePlate', async function(ctx) {
 
 router.post('/upload',koaBody({multipart: true}), async function(ctx) {
     let file = ctx.request.body.files.file;
-    let result = await attachmentModule.uploadAttachment(file.path);
+    let fileName = file.name;
+    let result = await attachmentModule.uploadAttachment(file.path, fileName);
 
     ctx.body = result;
 });
@@ -141,7 +142,7 @@ router.post('/upload',koaBody({multipart: true}), async function(ctx) {
 router.post('/addIndexArticle', async function (ctx) {
     let article_id = ctx.request.body.article_id;
     let schema = {
-        article_id: Joi.number(),
+        article_id: Joi.number()
     };
     Joi.validate({"article_id":article_id}, schema, function(err) {
         if(err) throw 40001;

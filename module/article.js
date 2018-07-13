@@ -105,8 +105,10 @@ exports.getArticleList = function (articleType, pageInfo) {
 };
 
 exports.getOneArticle = function (articleId) {
-    return articleModel.findOne({
+    return articleModel.findOneAndUpdate({
         _id: articleId
+    }, {
+        $inc: {"readingVolume": 1}
     }).populate('pic_url', 'attachment_url');
 };
 

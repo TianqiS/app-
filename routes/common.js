@@ -73,13 +73,11 @@ router.get('/getOnePlate', async function (ctx) {
         plateId : Joi.number()
     };
 
-    Joi.validate({"plateId": plateId},schema,function (err) {
+    Joi.validate({"plateId": plateId}, schema, function (err) {
         if(err) throw 40001;
     });
 
     let result = await typeModule.getOnePlate(plateId);
-
-    console.log(result);
 
     ctx.body = result;
 });
@@ -90,7 +88,7 @@ router.get('/getOneArticle', async function (ctx) {
         articleId : Joi.number()
     };
 
-    Joi.validate({"articleId":articleId},schema,function (err) {
+    Joi.validate({"articleId":articleId}, schema, function (err) {
         if(err) throw 40001;
     });
 
@@ -108,7 +106,7 @@ router.get('/searchArticle', async function(ctx) {
         time :JoiDate.date().format('YYYY-MM-DD')
     };
 
-    JoiDate.validate(ctx,schema,function (err) {
+    JoiDate.validate(ctx, schema, function (err) {
         if(err) throw 40001;
     });
 
@@ -117,7 +115,7 @@ router.get('/searchArticle', async function(ctx) {
     ctx.body = article;
 });
 
-router.get('/getIndex',async function (ctx) {
+router.get('/getIndex', async function (ctx) {
     let pageInfo = {};
     pageInfo.page = ctx.query.page;
     pageInfo.perPage = ctx.query.perPage;

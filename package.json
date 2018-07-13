@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "debug": "^2.6.3",
+    "file-type": "^8.1.0",
     "ioredis": "^3.2.2",
     "joi": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
@@ -30,6 +31,7 @@
     "mongoose": "^5.0.15",
     "pug": "^2.0.0-rc.1",
     "qiniu": "^7.1.5",
+    "read-chunk": "^2.1.0",
     "request": "^2.86.0"
   },
   "devDependencies": {
