@@ -109,7 +109,13 @@ exports.getOneArticle = function (articleId) {
         _id: articleId
     }, {
         $inc: {"readingVolume": 1}
-    }).populate('pic_url', 'attachment_url');
+    }).populate('pic_url', 'attachment_url').populate({
+        path: 'template.attachment_list',
+        model: 'attachment'
+    }).populate({
+        path: 'template.attach_id',
+        model: 'attachment'
+    })
 };
 
 exports.searchArticle = function (keyword, time) {
