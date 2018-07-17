@@ -6,6 +6,7 @@ const Joi = require('joi');
 const Extension = require('joi-date-extensions');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
+const indexModule = require('../module/index');
 const typeModule = require('../module/type');
 const utils = require('../utils/utils');
 const JoiDate = Joi.extend(Extension);
@@ -72,13 +73,11 @@ router.get('/getOnePlate', async function (ctx) {
         plateId : Joi.number()
     };
 
-    Joi.validate({"plateId": plateId},schema,function (err) {
+    Joi.validate({"plateId": plateId}, schema, function (err) {
         if(err) throw 40001;
     });
 
     let result = await typeModule.getOnePlate(plateId);
-
-    console.log(result);
 
     ctx.body = result;
 });
@@ -89,7 +88,7 @@ router.get('/getOneArticle', async function (ctx) {
         articleId : Joi.number()
     };
 
-    Joi.validate({"articleId":articleId},schema,function (err) {
+    Joi.validate({"articleId":articleId}, schema, function (err) {
         if(err) throw 40001;
     });
 
@@ -107,7 +106,7 @@ router.get('/searchArticle', async function(ctx) {
         time :JoiDate.date().format('YYYY-MM-DD')
     };
 
-    JoiDate.validate(ctx,schema,function (err) {
+    JoiDate.validate(ctx, schema, function (err) {
         if(err) throw 40001;
     });
 
@@ -116,6 +115,22 @@ router.get('/searchArticle', async function(ctx) {
     ctx.body = article;
 });
 
+router.get('/getIndex', async function (ctx) {
+    let pageInfo = {};
+    pageInfo.page = ctx.query.page;
+    pageInfo.perPage = ctx.query.perPage;
 
+    let schema = {
+        page: Joi.number(),
+        perPage: Joi.number()
+    };
+
+    Joi.validate(pageInfo, schema, function(err) {
+        if(err) throw 40001;
+    });
+    let result = await indexModule.getIndex(pageInfo);
+
+    ctx.body = result;
+});
 
 module.exports = router;

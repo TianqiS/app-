@@ -2,6 +2,7 @@ const typeModel = require('../model/type');
 const articleModel = require('../model/article');
 const template = require('../model/template');
 const attachmentModel = require('../model/attachment');
+
 const templateMap = {
     "1": template.advertisementModel,
     "2": template.competitionModel,
@@ -31,6 +32,9 @@ exports.addArticleType = function (typeInfo) {
         article_type: typeInfo.articleType,
         detail: typeInfo.detail,
         pic_url: typeInfo.pic_url
+    }).catch(err => {
+        console.log(err);
+        if (err) throw 40003;
     })
 };
 
@@ -43,7 +47,10 @@ exports.addArticle = function (articleInfo) {
         pic_url: articleInfo.pic_url
     }).then(result => {
         let typeModel = templateMap[articleInfo.type];
-        result.template = new typeModel(articleInfo.template);
+        result.template =  {};
+        if(!!typeModel) {
+            result.template = new typeModel(articleInfo.template);
+        }
         result.save();
     }).catch(err => {
         if (err) throw 40003;
@@ -85,9 +92,10 @@ exports.getArticleList = function (articleType, pageInfo) {
     let perPage = pageInfo.perPage * 1 || 10;
     let pageNumber = (page - 1) * perPage;
 
+
     return articleModel.find({
         type: articleType
-    }).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
+    }).sort({'_id': -1}).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
         path: 'template.attachment_list',
         model: 'attachment'
     }).populate({
@@ -97,8 +105,10 @@ exports.getArticleList = function (articleType, pageInfo) {
 };
 
 exports.getOneArticle = function (articleId) {
-    return articleModel.findOne({
+    return articleModel.findOneAndUpdate({
         _id: articleId
+    }, {
+        $inc: {"readingVolume": 1}
     }).populate('pic_url', 'attachment_url');
 };
 

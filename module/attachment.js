@@ -1,10 +1,10 @@
 let attachmentModel = require('../model/attachment');
 let qiniu = require('../utils/qiniu');
 
-exports.uploadAttachment = function(filePath) {
-    return qiniu.qiniuUpload(filePath).then(result => {
+exports.uploadAttachment = function(filePath, fileName) {
+    return qiniu.qiniuUpload(filePath, fileName).then(result => {
         return attachmentModel.insertValue({
-            key: result.key,
+            key: fileName,
             attachment_url: result.url
         })
     })

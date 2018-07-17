@@ -21,6 +21,9 @@ const article = new Schema({
         min: 1,
         max: 6
     },
+    readingVolume: {
+        type: Number,
+    },
     template: template.templateModel,
     create_time: {
         type: String,
