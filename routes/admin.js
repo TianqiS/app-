@@ -113,12 +113,11 @@ router.post('/deletePlate', async function(ctx) {
 
 router.post('/updatePlate', async function(ctx) {
     //let plateId = ctx.request.body.plateId;
-    let plateInfo = _.pick(ctx.request.body, ['plateId', 'article_type', 'detail', 'pic_url']);
+    let plateInfo = _.pick(ctx.request.body, ['plateId', 'article_type', 'pic_url']);
 
     let schema = {
         plateId: Joi.number(),
         article_type: Joi.string(),
-        detail: Joi.string(),
         pic_url: Joi.number(),
     };
 

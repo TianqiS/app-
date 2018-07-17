@@ -52,24 +52,13 @@
         var picId;
 
 
-        $.ajax({
-            url: '../common/plateList',
-            method: 'get',
-            success: function (plateInfo) {
-                plateInfos = plateInfo;
-                for (var plate of plateInfo) {
-                    $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
-                }
-
-            }
-        });
+        getListRefresh();
 
         $dropdown.change(function () {
             $plateName.val($dropdown.find("option:selected").text());
             var currentPlate = plateInfos.find(function(info) {
-                console.log(info)
                 return info._id == $dropdown.val();
-            })
+            });
             $image.attr('src', currentPlate.pic_url.attachment_url);
         });
 
@@ -84,7 +73,7 @@
                 };
                 reader.readAsDataURL(file[0]);
             }
-        })
+        });
 
         $saveButton.click(function () {
             var plateName = $plateName.val();
@@ -96,28 +85,37 @@
                 data: {
                     "plateId": plateId,
                     "article_type": plateName,
-                    "detail": " ",
                     "pic_url": picId
                 },
                 success: function(data) {
-                    $.ajax({
-                        url: '../common/plateList',
-                        method: 'get',
-                        success: function(plateInfo) {
-                            plateInfos = plateInfo;
-                            window.alert('提交成功')
-                        },
-                        error: function(err) {
-                            console.log(err);
-                        }
-                    })
+                    $dropdown.empty();
+                    getListRefresh().then(function() {
+                        $dropdown.val(plateId);
+                        $('.text').text(plateName)
+                    });
+                    window.alert('保存成功');
                 },
                 error: function(err) {
                     console.log(err)
                 }
             })
+        });
 
-        })
+        function getListRefresh() {
+            return new Promise(function(resolve, reject) {
+                return $.ajax({
+                    url: '../common/plateList',
+                    method: 'get',
+                    success: function (plateInfo) {
+                        plateInfos = plateInfo;
+                        for (var plate of plateInfo) {
+                            $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
+                        }
+                        return resolve()
+                    }
+                });
+            });
+        }
     })
 
 </script>
