@@ -118,7 +118,7 @@ router.post('/updatePlate', async function(ctx) {
         plateId: Joi.number(),
         article_type: Joi.string(),
         detail: Joi.string(),
-        pic_url: Joi.string(),
+        pic_url: Joi.number(),
     };
 
     Joi.validate(plateInfo, schema, function(err) {

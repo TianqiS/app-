@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>咨询后台管理系统</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/semantic.min.js"></script>
+    <script src="../js/jquery.fileupload.js"></script>
+    <link rel="stylesheet" href="../css/semantic.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/plate.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div class="outsidePart">
+    <div class="container">
+        <div class="plateSelect">
+            <select class="ui dropdown" id="dropdown">
+                <option value="">选择模块</option>
+            </select>
+        </div>
+        <div class="plateName">
+            <span>板块名称</span>
+            <input name="plateName" type="text">
+        </div>
+        <div class="platePic">
+            <span>板块封面</span>
+            <img class="ui medium rounded image" src="../img/square-image.png">
+            <label class="ui button">
+                <span>上传文件</span>
+                <input id="uploadFile" type="file" name="file" style="display: none">
+            </label>
+        </div>
+        <div class="userButton">
+            <button class="ui olive button saveButton">保存</button>
+            <button class="ui orange button deleteButton">删除</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.ui.dropdown')
+        .dropdown();
+    $(function () {
+        var $dropdown = $('#dropdown');
+        var $plateName = $('input[name=plateName]');
+        var $uploadFile = $('#uploadFile');
+        var $saveButton = $('.saveButton');
+        var $deleteButton = $('.deleteButton');
+        var $image = $('.platePic').find($('img'));
+
+        var plateInfos = [];
+        var picId;
+
+
+        $.ajax({
+            url: '../common/plateList',
+            method: 'get',
+            success: function (plateInfo) {
+                plateInfos = plateInfo;
+                for (var plate of plateInfo) {
+                    $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
+                }
+
+            }
+        });
+
+        $dropdown.change(function () {
+            $plateName.val($dropdown.find("option:selected").text());
+            var currentPlate = plateInfos.find(function(info) {
+                console.log(info)
+                return info._id == $dropdown.val();
+            })
+            $image.attr('src', currentPlate.pic_url.attachment_url);
+        });
+
+        $uploadFile.ajaxfileupload({
+            action: '../admin/upload',
+            onComplete: function (response) {
+                picId = response._id;
+                var file = $($uploadFile[0].files);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $image.attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file[0]);
+            }
+        })
+
+        $saveButton.click(function () {
+            var plateName = $plateName.val();
+            var plateId = $dropdown.val();
+
+            $.ajax({
+                url: '../admin/updatePlate',
+                method: 'post',
+                data: {
+                    "plateId": plateId,
+                    "article_type": plateName,
+                    "detail": " ",
+                    "pic_url": picId
+                },
+                success: function(data) {
+                    $.ajax({
+                        url: '../common/plateList',
+                        method: 'get',
+                        success: function(plateInfo) {
+                            plateInfos = plateInfo;
+                            window.alert('提交成功')
+                        },
+                        error: function(err) {
+                            console.log(err);
+                        }
+                    })
+                },
+                error: function(err) {
+                    console.log(err)
+                }
+            })
+
+        })
+    })
+
+</script>
+</body>
+</html>

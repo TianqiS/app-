@@ -1,0 +1,299 @@
+{ 
+    "_id" : NumberInt(0), 
+    "__v" : NumberInt(0), 
+    "seq" : NumberInt(29)
+}
+{ 
+    "_id" : NumberInt(1), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-05-23 00:22:01", 
+    "pic_url" : NumberInt(4), 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b0443a9f3803b15d4f01481"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(2), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-05-23 00:22:23", 
+    "pic_url" : NumberInt(4), 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b0443bff3803b15d4f01483"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(3), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-05-23 00:22:24", 
+    "pic_url" : NumberInt(4), 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b0443c0f3803b15d4f01485"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(4), 
+    "title" : "testArticle123", 
+    "context" : "balabalbaaaaa.....", 
+    "type" : NumberInt(4), 
+    "create_time" : "2018-05-23 00:22:24", 
+    "pic_url" : NumberInt(4), 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b430731f552c60c0c8840f8"), 
+        "templateType" : "news", 
+        "start_time" : "10-08", 
+        "end_time" : "10-09"
+    }, 
+    "update_time" : ISODate("2018-07-09T06:56:49.597+0000")
+}
+{ 
+    "_id" : NumberInt(5), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-05-23 00:22:24", 
+    "pic_url" : NumberInt(4), 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b0443c0f3803b15d4f01489"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(6), 
+    "create_time" : "2018-07-07 13:55:41", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(8), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-07 14:02:15", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b405767f552c60c0c8840cf"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(9), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-07 16:08:11", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b4074ebf552c60c0c8840d5"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(11), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-08 12:32:11", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b4193cbf552c60c0c8840d9"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(12), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-08 12:32:26", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b4193daf552c60c0c8840db"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(13), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-10 19:33:29", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b449989f552c60c0c8841b6"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(16), 
+    "create_time" : "2018-07-11 11:56:30", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(17), 
+    "title" : "比赛1", 
+    "context" : "比赛内容1", 
+    "type" : NumberInt(2), 
+    "create_time" : "2018-07-11 11:58:58", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "attach_id" : [
+            "2"
+        ], 
+        "_id" : ObjectId("5b458082f552c60c0c8844f8"), 
+        "templateType" : "competition", 
+        "start_time" : "2017-6", 
+        "final_time" : "2017-8", 
+        "qualification" : "条件1", 
+        "arrangement" : "安排1"
+    }
+}
+{ 
+    "_id" : NumberInt(18), 
+    "title" : "招聘1", 
+    "context" : "招聘内容1", 
+    "type" : NumberInt(5), 
+    "create_time" : "2018-07-11 12:03:49", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b4581a5f552c60c0c884500"), 
+        "templateType" : "recruit", 
+        "time" : "2018-6", 
+        "location" : "学活", 
+        "people" : "张三", 
+        "company" : "华为"
+    }
+}
+{ 
+    "_id" : NumberInt(19), 
+    "title" : "新闻1", 
+    "context" : "新闻内容1", 
+    "type" : NumberInt(4), 
+    "create_time" : "2018-07-11 12:05:53", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b458221f552c60c0c884504"), 
+        "templateType" : "news", 
+        "start_time" : "2018-11-23", 
+        "end_time" : "2018-12-14"
+    }
+}
+{ 
+    "_id" : NumberInt(24), 
+    "title" : "广告1", 
+    "context" : "广告2", 
+    "type" : NumberInt(1), 
+    "create_time" : "2018-07-11 12:20:37", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "attachment_list" : [
+            NumberInt(1), 
+            NumberInt(2)
+        ], 
+        "_id" : ObjectId("5b458595f552c60c0c884544"), 
+        "templateType" : "advertisement"
+    }
+}
+{ 
+    "_id" : NumberInt(25), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-12 15:36:50", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b470512f552c60c0c88483f"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(26), 
+    "title" : "文章标题", 
+    "context" : "文章内容", 
+    "type" : NumberInt(3), 
+    "create_time" : "2018-07-12 15:36:58", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b47051af552c60c0c884841"), 
+        "templateType" : "lecture", 
+        "teacher" : "song", 
+        "time" : "10-05", 
+        "location" : "七教101", 
+        "theme" : "嘿嘿", 
+        "details" : "以上是讲座的细节"
+    }
+}
+{ 
+    "_id" : NumberInt(29), 
+    "title" : "推送", 
+    "context" : "推送内容", 
+    "type" : NumberInt(6), 
+    "create_time" : "2018-07-12 15:53:17", 
+    "__v" : NumberInt(0), 
+    "template" : {
+        "_id" : ObjectId("5b4708ed69c68c4563f91fca")
+    }, 
+    "pic_url" : NumberInt(4)
+}
