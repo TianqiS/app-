@@ -1,4 +1,5 @@
 const md5 = require('md5');
+const _ = require('lodash');
 const errorList = require('../error.json');
 const koaSession = require("koa-session2");
 const sessionStore = require('./sessionStore');
@@ -28,32 +29,32 @@ exports.errHandle = async function (ctx, next) {
                 };
             }
         } else {
-              ctx.status = 403;
-              ctx.body = {
-                  status: 'error',
-                  msg: errorList[40004]
-              }
+            ctx.status = 403;
+            ctx.body = {
+                status: 'error',
+                msg: errorList[40004]
+            }
         }
     }
 };
 
 exports.isLogin = async function (ctx, next) {
     var str = ctx.request.url;
-    str = str.match(/\/(\S*)\//)[1];
-    if (str === "admin") {
+    str = str.split('/')[1];
+    if (_.indexOf(['admin'], str) != -1) {
         // 判断是否有session
         if (ctx.session.type === 'admin') {
             await next();
         }
         else {
-            ctx.redirect('../common/login')
+            ctx.redirect('../login.html')
         }
     } else {
         await next();
     }
 };
 
-exports.session = function() {
+exports.session = function () {
     return koaSession({
         key: 'koa:sess',
         maxAge: 86400000,

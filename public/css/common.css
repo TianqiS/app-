@@ -1,8 +1,8 @@
-html {
+html, body {
     margin: 0;
     width: 100%;
     position: relative;
     min-height: 500px;
-    background-color: #448ED3;
+    background-color: #448ED3 !important;
     font-family: 苹方, 微软雅黑;
 }

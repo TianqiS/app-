@@ -20,10 +20,12 @@ exports.updatePlate = function(plateInfo) {
         _id: plateInfo.plateId
     }).then(result => {
         return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
-            if(plateInfo.pic_url) return attachment.remove();
+            if(plateInfo.pic_url && attachment && plateInfo.pic_url != attachment._id) return attachment.remove();
         }).then(() => {
-            Object.assign(plateInfo);
+            Object.assign(result, plateInfo);
             result.save();
+        }).catch(err => {
+            console.log(err)
         })
 
     })

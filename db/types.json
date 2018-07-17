@@ -1,0 +1,385 @@
+{ 
+    "_id" : NumberInt(2), 
+    "detail" : "比赛信息", 
+    "__v" : NumberInt(0), 
+    "pic_url" : "1"
+}
+{ 
+    "_id" : NumberInt(3), 
+    "detail" : "讲座", 
+    "__v" : NumberInt(0), 
+    "pic_url" : "1"
+}
+{ 
+    "_id" : NumberInt(4), 
+    "detail" : "新闻", 
+    "__v" : NumberInt(0), 
+    "pic_url" : "1"
+}
+{ 
+    "_id" : NumberInt(6), 
+    "detail" : "招聘信息", 
+    "__v" : NumberInt(0), 
+    "pic_url" : "1"
+}
+{ 
+    "_id" : NumberInt(7), 
+    "article_type" : "test", 
+    "detail" : "hhhh", 
+    "__v" : NumberInt(0), 
+    "pic_url" : "1"
+}
+{ 
+    "_id" : NumberInt(8), 
+    "article_type" : "test", 
+    "detail" : "hhhhhhhh", 
+    "pic_url" : "1", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(9), 
+    "article_type" : "", 
+    "detail" : "", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(0), 
+    "__v" : NumberInt(0), 
+    "seq" : NumberInt(63)
+}
+{ 
+    "_id" : NumberInt(1), 
+    "article_type" : "ww", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(5), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(10), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(11), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(12), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(13), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(14), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(15), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(16), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(17), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(18), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(19), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(20), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(21), 
+    "article_type" : "1a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(22), 
+    "article_type" : "22", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(23), 
+    "article_type" : "22sdc", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(24), 
+    "article_type" : "sdc", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(25), 
+    "article_type" : "sdc", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(26), 
+    "article_type" : "sdc", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(27), 
+    "article_type" : "sdc", 
+    "detail" : "aaj", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(28), 
+    "article_type" : "", 
+    "detail" : "", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(29), 
+    "article_type" : "aa", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(30), 
+    "article_type" : "aa", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(31), 
+    "article_type" : "aa", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(32), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(33), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(34), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(35), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(36), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(37), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(38), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(39), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(40), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(41), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(42), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(43), 
+    "article_type" : "a", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(44), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(45), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(46), 
+    "article_type" : "1", 
+    "detail" : "aa", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(47), 
+    "article_type" : "1", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(48), 
+    "article_type" : "1", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(49), 
+    "article_type" : "1", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(50), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(51), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(52), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(53), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(54), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(55), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(56), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(57), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(58), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(59), 
+    "article_type" : "aaa", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(60), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(61), 
+    "article_type" : "a", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(62), 
+    "article_type" : "11", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(63), 
+    "article_type" : "11", 
+    "detail" : "a", 
+    "__v" : NumberInt(0)
+}

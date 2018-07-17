@@ -20,7 +20,6 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
   extension: 'pug'
@@ -41,6 +40,8 @@ app.use(utils.errHandle);
 app.use(utils.session());
 //login
 // app.use(utils.isLogin);
+
+app.use(require('koa-static')(__dirname + '/public'))
 
 // routes
 app.use(admin.routes(), admin.allowedMethods());

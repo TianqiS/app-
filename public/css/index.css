@@ -19,9 +19,11 @@
 
 .partLeft {
     display: inline-block;
+    cursor: pointer;
 }
 
 .partRight {
+    cursor: pointer;
     display: inline-block;
     margin-left: 12%;
 }
