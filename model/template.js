@@ -5,6 +5,7 @@ const competition = require('./competition');
 const lecture = require('./lecture');
 const news = require('./news');
 const recruit = require('./recruit');
+const wechat = require('./wechat');
 
 let typeModel = new Schema({}, {discriminatorKey: 'templateType'});
 
@@ -17,5 +18,6 @@ exports.competitionModel = template.path('type').discriminator('competition', co
 exports.lectureModel = template.path('type').discriminator('lecture', lecture);
 exports.newsModel = template.path('type').discriminator('news', news);
 exports.recruitModel = template.path('type').discriminator('recruit', recruit);
+exports.wechatModel = template.path('type').discriminator('wechat',wechat);
 exports.templateModel = template;
 

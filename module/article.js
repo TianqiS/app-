@@ -8,7 +8,8 @@ const templateMap = {
     "2": template.competitionModel,
     "3": template.lectureModel,
     "4": template.newsModel,
-    "5": template.recruitModel
+    "5": template.recruitModel,
+    "6": template.wechatModel
 };
 
 let formatDateTime = function (inputTime) {
