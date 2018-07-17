@@ -28,6 +28,34 @@
 
 .platePic img {
     margin-left: 50px;
-    width: 200px !important;
-    height: 200px !important;
+    width: 240px !important;
+    height: 180px !important;
+}
+.plateSelect {
+    margin: 20px 20px 0px 20px;
+}
+
+.plateName{
+    margin: 20px 20px 10px 20px;
+}
+.plateName input{
+    margin: 0px 20px 10px 20px;
+}
+
+.platePic{
+    margin: 20px 20px 10px 20px;
+    display: inline;
+}
+
+.platePic img{
+    margin: -10px 10px 10px 100px;
+}
+.uploadButton{
+    margin: -46px 10px 0px 360px;
+}
+.userButton{
+    margin: 15px 10px 30px 100px;
+}
+.userButton button{
+    width: 120px;
 }
