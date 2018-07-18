@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>咨询后台管理系统</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/semantic.min.js"></script>
+    <link rel="stylesheet" href="../css/semantic.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/articleList.css">
+    <link rel="stylesheet" href="../css/button.css">
+</head>
+<body>
+<div class="outsidePart">
+    <div class="top">
+        <div class="plateDropdown">
+            <select class="ui dropdown" id="dropdown">
+                <option value="">选择模块</option>
+            </select>
+        </div>
+        <div class="createArticleButton">
+            <a href="#">
+                <button class="ui olive button saveButton">新建文章</button>
+            </a>
+        </div>
+    </div>
+    <div class="articleList">
+        <div class="ui grid" id="articleList"></div>
+    </div>
+    <div class="pageInfo">
+        <div class="lastPage"><img src="../img/lastPage.png"></div>
+        <div class="currentPage"></div>
+        <div class="nextPage"><img src="../img/nextPage.png"></div>
+    </div>
+</div>
+<script>
+    $('.ui.dropdown')
+        .dropdown();
+
+    $(function () {
+        var pageStatus = true;
+        var currentPage;
+        var plateId;
+        var perPageNum = 5;
+        var $dropdown = $('#dropdown');
+        var $articleList = $('#articleList');
+        var $lastPage = $('.lastPage');
+        var $nextPage = $('.nextPage');
+
+        refreshPage(1);
+        getListRefresh();
+
+        $dropdown.change(function() {
+            pageStatus = true;
+            refreshPage(1);
+            plateId = $dropdown.val();
+            getArticleList(plateId, 1, perPageNum);
+        });
+
+
+
+        function getArticleList(plateId, page, perPage) {
+            return new Promise(function(resolve, reject) {
+                return $.ajax({
+                    method: 'get',
+                    url: `../common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}`,
+                    success: function(articleList) {
+                        if(articleList.length === 0) return resolve(pageStatus = false);
+                        clearList();
+                        pageStatus = true;
+                        articleList.forEach(e => {
+                            var time = new Date(e.create_time).Format('yyyy-MM-dd');
+                            var articleDiv = `<div class="five wide column">${e.title}</div><div class="six wide column">阅读量${e.readingVolume}</div><div class="five wide column" style="text-align: center">${time}</div> `
+                            $articleList.append(`<div class="sixteen wide column ui grid articleContainer">${articleDiv}</div>`)
+                        });
+                        return resolve();
+                    },
+                    error: function(err) {
+                        pageStatus = false;
+                        return reject();
+                    }
+                })
+            })
+        }
+
+        $lastPage.click(function() {
+            --currentPage;
+            currentPage = (currentPage <= 0)? 1 : currentPage;
+            getArticleList(plateId, currentPage, perPageNum).then(function() {
+                if(!pageStatus) --currentPage;
+                refreshPage(currentPage);
+            });
+        });
+
+        $nextPage.click(function() {
+           ++currentPage;
+           getArticleList(plateId, currentPage, perPageNum).then(function() {
+               if(!pageStatus) --currentPage;
+               refreshPage(currentPage);
+           })
+        });
+
+        function getListRefresh() {
+            return new Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: '../common/plateList',
+                    method: 'get',
+                    success: function (plateInfo) {
+                        for (var plate of plateInfo) {
+                            $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
+                        }
+                        return resolve()
+                    }
+                });
+            });
+        }
+
+        function clearList() {
+            $articleList.children(".articleContainer").remove();
+        }
+
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+
+        function refreshPage(pageNum) {
+            if(!pageStatus) return;
+            currentPage = pageNum;
+            $('.currentPage').text(currentPage);
+        }
+
+    })
+</script>
+</body>
+</html>

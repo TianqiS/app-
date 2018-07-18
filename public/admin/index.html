@@ -32,10 +32,14 @@
         var $partRight = $('.partRight');
         var pageRedirect = function(url) {
             window.location.href = url;
-        }
+        };
 
         $partLeft.on('click', function() {
             pageRedirect('./plate.html');
+        });
+
+        $partRight.on('click', function() {
+            pageRedirect('./articleList.html');
         })
 
     })

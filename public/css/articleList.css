@@ -1,0 +1,82 @@
+.outsidePart {
+    top: 30%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: 450px;
+    width: 750px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.plateDropdown {
+    margin: 10px 0 0 20px;
+    display: inline-block;
+}
+
+.createArticleButton {
+    float: right;
+    display: inline-block;
+    margin: 10px 20px 0 0;
+}
+
+#articleList {
+    width: 95%;
+    margin-left: 20px;
+}
+
+#articleList:first-child {
+    margin-top: 22px;
+}
+
+.articleContainer {
+    margin: 10px !important;
+    border: 1px solid #CCCCCC;
+    border-radius: 8px;
+}
+
+.ui.grid>.column:not(.row) {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.lastPage img, .nextPage img{
+    width: 20px;
+    height: 20px;
+}
+
+.lastPage, .nextPage, .currentPage {
+    display: inline-block;
+}
+
+.currentPage {
+    float: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.lastPage {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.nextPage {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 16px;
+}
+
+.pageInfo {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
