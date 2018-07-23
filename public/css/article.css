@@ -11,6 +11,15 @@
     background-color: white;
 }
 
+.plateDropdown {
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+.articleName {
+    margin-left: 40px;
+}
+
 .articleName input {
     margin-left: 10px;
     margin-top: 30px;
@@ -19,16 +28,17 @@
     outline: none;
 }
 
+.articlePic {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
 .checkbox {
     padding-top: 4px;
     margin-left: 20px;
 }
 
 .Pic{
-    /*position: absolute;*/
-    /*top: 156px;*/
-    /*right: 281px;*/
-    /*display: inline;*/
     margin: 50px 30px 0px 0px;
 }
 
@@ -60,4 +70,52 @@
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+}
+
+.userButton {
+    margin: 30px auto 30px auto;
+    text-align: center;
+}
+
+.saveButton {
+    position: relative;
+    right: 50px;
+}
+
+.deleteButton {
+    position: relative;
+    left: 50px;
+}
+
+
+/*工具栏内用*/
+
+span[data-value="Arial"]::before {
+    content: "Arial" !important;
+    font-family: "Arial";
+}
+span[data-value="宋体"]::before {
+    content: "宋体" !important;
+    font-family: "宋体";
+}
+span[data-value="黑体"]::before {
+    content: "黑体" !important;
+    font-family: "黑体";
+}
+span[data-value="微软雅黑"]::before {
+    content: "微软雅黑" !important;
+    font-family: "微软雅黑";
+}
+/*编辑器内容用*/
+.ql-font-Arial {
+    font-family: "Arial";
+}
+.ql-font-宋体 {
+    font-family: "宋体";
+}
+.ql-font-黑体 {
+    font-family: "黑体";
+}
+.ql-font-微软雅黑 {
+    font-family: "微软雅黑";
 }
