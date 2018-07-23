@@ -22,6 +22,7 @@ const article = new Schema({
         max: 6
     },
     readingVolume: {
+        defaultValue: 0,
         type: Number,
     },
     template: template.templateModel,

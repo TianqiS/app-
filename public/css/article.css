@@ -9,6 +9,7 @@
     width: 750px;
     border-radius: 10px;
     background-color: white;
+    font-size: 16px;
 }
 
 .plateDropdown {
@@ -17,10 +18,12 @@
 }
 
 .articleName {
+    color: gray;
     margin-left: 40px;
 }
 
 .articleName input {
+    color: gray;
     margin-left: 10px;
     margin-top: 30px;
     border:none;
@@ -29,6 +32,7 @@
 }
 
 .articlePic {
+    color: gray;
     margin-top: 40px;
     margin-left: 40px;
 }
@@ -77,14 +81,18 @@
     text-align: center;
 }
 
-.saveButton {
+.saveButtonUpdate {
     position: relative;
     right: 50px;
 }
 
-.deleteButton {
+.deleteButtonUpdate {
     position: relative;
     left: 50px;
+}
+
+.deleteButton {
+    display: none !important;
 }
 
 

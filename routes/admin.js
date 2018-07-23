@@ -56,9 +56,9 @@ router.post('/addArticle', async function (ctx) {
     Joi.validate(articleInfo, schema, function(err) {
         if(err) throw 40001;
     });
-    await articleModule.addArticle(articleInfo);
+    let newArticleId = await articleModule.addArticle(articleInfo);
 
-    ctx.body = 'add article success';
+    return ctx.body = newArticleId;
 
 });
 
@@ -78,8 +78,8 @@ router.post('/updateArticle', async function (ctx) {
     Joi.validate(articleInfo, schema, function(err) {
         if(err) throw 40001;
     });
-    await articleModule.updateArticle(articleInfo);
-    ctx.body = 'modify success';
+    let article_id = await articleModule.updateArticle(articleInfo);
+    ctx.body = article_id;
 });
 
 router.post('/deleteArticle', async function (ctx) {

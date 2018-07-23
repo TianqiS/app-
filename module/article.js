@@ -53,6 +53,7 @@ exports.addArticle = function (articleInfo) {
             result.template = new typeModel(articleInfo.template);
         }
         result.save();
+        return result._id;
     }).catch(err => {
         if (err) throw 40003;
     })
@@ -70,6 +71,7 @@ exports.updateArticle = function (query) {
             result.template = new typeModel(query.template);
             result.update_time = new Date();
             result.save();
+            return result._id;
         }).catch(err => {
             if (err) throw 40003;
         })

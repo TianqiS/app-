@@ -46,8 +46,8 @@
         </div>
         <input id="editorUpload" type="file" name="file" style="display: none">
         <div class="userButton">
-            <button class="ui olive button saveButton">保存</button>
-            <button class="ui red button deleteButton">删除</button>
+            <button class="ui olive button saveButton" id="saveButton">保存</button>
+            <button class="ui red button deleteButton" id="deleteButton">删除</button>
         </div>
         <!--<div class="ql-container ql-snow">-->
             <!--<div class="ql-editor">-->
@@ -139,7 +139,7 @@
 
 
 
-        $('.saveButton').click(function() {
+        $('#saveButton').click(function() {
             var html = quill.container.firstChild.innerHTML;
             var url = '../admin/addArticle';
             var data = {
@@ -156,11 +156,29 @@
                 method: 'post',
                 "data": data,
                 "url": url,
-                success: function(response) {
+                success: function(newArticleId) {
                     window.alert('保存成功');
+                    window.location.href = '../admin/article.html?articleId=' + newArticleId;
                 },
                 error: function(err) {
                     window.alert('出错了请重试');
+                }
+            })
+        });
+
+        $('#deleteButton').click(function() {
+            $.ajax({
+                method: 'post',
+                url: '../admin/deleteArticle',
+                data: {
+                    "articleId": articleId
+                },
+                success: function(response) {
+                    window.alert('删除成功');
+                    window.location.href = '../admin/articleList.html';
+                },
+                error: function(err) {
+                    console.log(err);
                 }
             })
         });
@@ -196,6 +214,9 @@
 
         function getArticleDeatil(articleId) {
             if(!articleId) return;
+            $('#saveButton').removeClass('saveButton').addClass('saveButtonUpdate');
+            $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
+
             $.ajax({
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId,
