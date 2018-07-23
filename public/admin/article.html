@@ -46,6 +46,7 @@
         </div>
         <input id="editorUpload" type="file" name="file" style="display: none">
         <div class="userButton">
+            <button class="ui orange button viewButton" id=viewButton> 预览</button>
             <button class="ui olive button saveButton" id="saveButton">保存</button>
             <button class="ui red button deleteButton" id="deleteButton">删除</button>
         </div>
@@ -69,6 +70,7 @@
         var $template = $('.template');
         var request = new GetRequest();
         var articleId = request.articleId || '';
+        var storage = window.localStorage;
         //编辑器配置
         var toolbarOptions = [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -137,6 +139,10 @@
             $('#editorUpload').click();
         });
 
+        quill.on('text-change', function(delta, oldDelta, source) {
+            storage.editorHtml = quill.container.firstChild.innerHTML;
+        });
+
 
 
         $('#saveButton').click(function() {
@@ -183,6 +189,12 @@
             })
         });
 
+        $('#viewButton').click(function() {
+            var url = '../admin/viewArticle.html';
+            if(!!articleId) url += '?articleId=' + articleId;
+            window.open(url);
+        });
+
         function getListRefresh() {
             return new Promise(function (resolve, reject) {
                 return $.ajax({
@@ -216,6 +228,7 @@
             if(!articleId) return;
             $('#saveButton').removeClass('saveButton').addClass('saveButtonUpdate');
             $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
+            $('#viewButton').removeClass('viewButton').addClass('viewButtonUpdate');
 
             $.ajax({
                 method: 'get',

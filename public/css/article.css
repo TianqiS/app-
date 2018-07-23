@@ -83,12 +83,16 @@
 
 .saveButtonUpdate {
     position: relative;
-    right: 50px;
 }
 
 .deleteButtonUpdate {
     position: relative;
-    left: 50px;
+    left: 20px;
+}
+
+.viewButtonUpdate {
+    position: relative;
+    right: 20px;
 }
 
 .deleteButton {

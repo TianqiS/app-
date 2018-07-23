@@ -1,0 +1,12 @@
+.container {
+    top: 30%;
+    width: 598px;
+    min-height: 450px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+}
