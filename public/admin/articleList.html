@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>咨询后台管理系统</title>
+    <title>资讯后台管理系统</title>
     <script src="../js/jquery.js"></script>
     <script src="../js/semantic.min.js"></script>
     <link rel="stylesheet" href="../css/semantic.min.css" type="text/css">
@@ -50,32 +50,34 @@
         refreshPage(1);
         getListRefresh();
 
-        $dropdown.change(function() {
+        $dropdown.change(function () {
             pageStatus = true;
             refreshPage(1);
             plateId = $dropdown.val();
             getArticleList(plateId, 1, perPageNum);
         });
 
-
-
         function getArticleList(plateId, page, perPage) {
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 return $.ajax({
                     method: 'get',
                     url: `../common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}`,
-                    success: function(articleList) {
-                        if(articleList.length === 0) return resolve(pageStatus = false);
+                    success: function (articleList) {
+                        if (articleList.length === 0) return resolve(pageStatus = false);
                         clearList();
                         pageStatus = true;
                         articleList.forEach(e => {
                             var time = new Date(e.create_time).Format('yyyy-MM-dd');
-                            var articleDiv = `<div class="five wide column">${e.title}</div><div class="six wide column">阅读量${e.readingVolume}</div><div class="five wide column" style="text-align: center">${time}</div> `
-                            $articleList.append(`<div class="sixteen wide column ui grid articleContainer">${articleDiv}</div>`)
+                            var articleDiv = `<div class="five wide column">${e.title}</div><div class="six wide column">阅读量${e.readingVolume}</div><div class="five wide column" style="text-align: center">${time}</div>`;
+                            $articleList.append(`<div class="sixteen wide column ui grid articleContainer"><div style="display: none" class="article_id">${e._id}</div>${articleDiv}</div>`)
+                        });
+                        $('.articleContainer').click(function() {
+                            var articleId = $(this).children('.article_id').text();
+                            window.location.href = '../admin/article.html?articleId=' + articleId;
                         });
                         return resolve();
                     },
-                    error: function(err) {
+                    error: function (err) {
                         pageStatus = false;
                         return reject();
                     }
@@ -83,21 +85,21 @@
             })
         }
 
-        $lastPage.click(function() {
+        $lastPage.click(function () {
             --currentPage;
-            currentPage = (currentPage <= 0)? 1 : currentPage;
-            getArticleList(plateId, currentPage, perPageNum).then(function() {
-                if(!pageStatus) --currentPage;
+            currentPage = (currentPage <= 0) ? 1 : currentPage;
+            getArticleList(plateId, currentPage, perPageNum).then(function () {
+                if (!pageStatus) --currentPage;
                 refreshPage(currentPage);
             });
         });
 
-        $nextPage.click(function() {
-           ++currentPage;
-           getArticleList(plateId, currentPage, perPageNum).then(function() {
-               if(!pageStatus) --currentPage;
-               refreshPage(currentPage);
-           })
+        $nextPage.click(function () {
+            ++currentPage;
+            getArticleList(plateId, currentPage, perPageNum).then(function () {
+                if (!pageStatus) --currentPage;
+                refreshPage(currentPage);
+            })
         });
 
         function getListRefresh() {
@@ -136,11 +138,14 @@
         };
 
         function refreshPage(pageNum) {
-            if(!pageStatus) return;
+            if (!pageStatus) return;
             currentPage = pageNum;
             $('.currentPage').text(currentPage);
         }
 
+        function pageRedirect(articleId) {
+            window.location.href = '../admin/article.html?articleId=' + articleId;
+        }
     })
 </script>
 </body>

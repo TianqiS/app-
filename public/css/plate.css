@@ -26,11 +26,6 @@
     outline: none;
 }
 
-.platePic img {
-    margin-left: 50px;
-    width: 240px !important;
-    height: 180px !important;
-}
 .plateSelect {
     margin: 20px 20px 0px 20px;
 }
@@ -49,6 +44,8 @@
 
 .platePic img{
     margin: -10px 10px 10px 100px;
+    width: 240px !important;
+    height: 180px !important;
 }
 .uploadButton{
     margin: -46px 10px 0px 360px;

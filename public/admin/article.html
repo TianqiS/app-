@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资讯后台管理系统</title>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/semantic.min.js"></script>
+    <script src="../js/jquery.fileupload.js"></script>
+    <script src="../js/quill.js"></script>
+    <link rel="stylesheet" href="../css/quill.snow.css">
+    <link rel="stylesheet" href="../css/semantic.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/article.css">
+</head>
+<body>
+<div class="outsidePart">
+    <div class="mainContainer">
+        <div class="plateDropdown">
+            <select class="ui dropdown" id="dropdown">
+                <option value="">选择模块</option>
+            </select>
+        </div>
+        <div class="articleName">
+            <span>文章名称</span>
+            <input name="articleName" type="text">
+        </div>
+        <div class="articlePic">
+            <span>添加封面</span>
+            <div class="ui checkbox">
+                <input type="checkbox" class="checkInput" value="addPic" name="addPic">
+                <label></label>
+            </div>
+            <div class="Pic">
+                <img class="ui medium rounded image" src="../img/square-image.png">
+                <div class="uploadButton">
+                    <label class="ui button">
+                        <span>上传文件</span>
+                        <input id="uploadFile" type="file" name="file" style="display: none">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="template"></div>
+        <div class="articleEditor">
+        </div>
+        <input id="editorUpload" type="file" name="file" style="display: none">
+        <div class="userButton">
+            <button class="ui olive button saveButton">保存</button>
+        </div>
+        <!--<div class="ql-container ql-snow">-->
+            <!--<div class="ql-editor">-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+<script>
+    $('.ui.dropdown')
+        .dropdown();
+    $('.ui.checkbox').checkbox();
+
+    $(function() {
+        var picId;
+        var plateList = [];
+        var $dropdown = $('#dropdown');
+        var $uploadFile = $('#uploadFile');
+        var $image = $('.Pic').find($('img'));
+        var $template = $('.template');
+        var request = new GetRequest();
+        var articleId = request.articleId || '';
+        //编辑器配置
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['link', 'image'],
+
+            ['clean']                                         // remove formatting button
+        ];
+        var option = {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        };//富文本编辑器配置
+
+        //富文本编辑器
+        var quill = new Quill('.articleEditor', option);
+        var toolbar = quill.getModule('toolbar');
+
+
+        getListRefresh();
+        getArticleDeatil(articleId);
+
+        $uploadFile.ajaxfileupload({
+            action: '../admin/upload',
+            onComplete: function (response) {
+                picId = response._id;
+                var file = $($uploadFile[0].files);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $image.attr('src', e.target.result);
+                };
+                reader.readAsDataURL(file[0]);
+            }
+        });
+
+        $('#editorUpload').ajaxfileupload({
+            action: '../admin/upload',
+            onComplete: function(response) {
+                quill.insertEmbed(10, 'image', response.attachment_url);
+            }
+        });
+
+        toolbar.addHandler('image', function() {
+            $('#editorUpload').click();
+        });
+
+
+
+        $('.saveButton').click(function() {
+            var html = quill.container.firstChild.innerHTML;
+            var url = '../admin/addArticle';
+            var data = {
+                title: $("input[name=articleName]").val(),
+                context: html,
+                type: $dropdown.val()
+            };
+            if(!!articleId) {
+                data.articleId = articleId;
+                url = '../admin/updateArticle';
+            }
+            if($("input[name='addPic']").get(0).checked === true ) data.pic_url = picId;
+            $.ajax({
+                method: 'post',
+                "data": data,
+                "url": url,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+        });
+
+        function getListRefresh() {
+            return new Promise(function (resolve, reject) {
+                return $.ajax({
+                    url: '../common/plateList',
+                    method: 'get',
+                    success: function (plateInfo) {
+                        plateList = plateInfo;
+                        for (var plate of plateInfo) {
+                            $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
+                        }
+                        return resolve()
+                    }
+                });
+            });
+        }
+
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                var strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        function getArticleDeatil(articleId) {
+            if(!articleId) return;
+            $.ajax({
+                method: 'get',
+                url: '../common/getOneArticle?articleId=' + articleId,
+                success: function(article) {
+                    $("input[name='articleName']").val(article.title);
+                    if(!!article.pic_url) {
+                        $image.attr('src', article.pic_url.attachment_url);
+                        $("input[name='addPic']").attr('checked', 'true');
+                    }
+                    $dropdown.val(article.type);
+                    $('.text').text(plateList[article.type - 1].article_type);
+                    quill.container.firstChild.innerHTML = article.context;
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+        }
+//
+//        function getTemplate(articleType) {
+//
+//        }
+    })
+</script>
+</body>
+</html>

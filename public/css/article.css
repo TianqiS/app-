@@ -1,0 +1,63 @@
+.outsidePart {
+    top: 30%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: auto;
+    width: 750px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.articleName input {
+    margin-left: 10px;
+    margin-top: 30px;
+    border:none;
+    border-bottom:1px solid rgba(144, 171, 170, 0.81);
+    outline: none;
+}
+
+.checkbox {
+    padding-top: 4px;
+    margin-left: 20px;
+}
+
+.Pic{
+    /*position: absolute;*/
+    /*top: 156px;*/
+    /*right: 281px;*/
+    /*display: inline;*/
+    margin: 50px 30px 0px 0px;
+}
+
+.Pic img{
+    width: 240px !important;
+    height: 180px !important;
+    margin: -10px 10px 10px 100px;
+    display: inline-block !important;
+}
+.uploadButton{
+    display: inline-block;
+    vertical-align: -65px;
+}
+
+.articleEditor {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    overflow:scroll; /*任何时候都强制显示滚动条*/
+    overflow:auto; /*需要的时候会出现滚动条*/
+    overflow-x:auto; /*控制X方向的滚动条*/
+    overflow-y:auto; /*控制Y方向的滚动条*/
+    height: 300px;
+    width: 80%;
+}
+
+.ql-toolbar {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}

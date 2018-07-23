@@ -72,7 +72,7 @@ router.post('/updateArticle', async function (ctx) {
         context: Joi.string(),
         type: Joi.number(),
         template: Joi.object(),
-        pic_url: Joi.object()
+        pic_url: Joi.string()
     };
 
     Joi.validate(articleInfo, schema, function(err) {

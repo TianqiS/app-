@@ -61,7 +61,7 @@ exports.addArticle = function (articleInfo) {
 exports.updateArticle = function (query) {
     return articleModel.findOne({_id: query.articleId}).then(result => {
         return attachmentModel.findOne({_id: result.pic_url}).then(attachment => {
-            if (query.pic_url) {
+            if (query.pic_url && attachment && query.pic_url != attachment._id) {
                 return attachment.remove();
             }
         }).then(() => {
