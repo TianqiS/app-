@@ -10,16 +10,9 @@ const competition = new Schema({
         type: String,
         required: true
     },
-    attach_id: {
-        type: [String]
-    },
-    qualification: {
-        type: String,
-        required: true
-    },
-    arrangement: {
-        type: String,
-        required: true
+    attachment_list: {
+        type: [Number],
+        ref: 'attachment'
     }
 });
 

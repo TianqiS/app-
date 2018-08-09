@@ -11,8 +11,8 @@
 </head>
 <body>
 <div class="ql-container ql-snow container">
-<div class="ql-editor">
-</div>
+    <div class="ql-editor">
+    </div>
 </div>
 <script>
     $(function() {
@@ -29,31 +29,27 @@
             if (url.indexOf("?") != -1) {
                 var str = url.substr(1);
                 var strs = str.split("&");
-                for(var i = 0; i < strs.length; i ++) {
-                    theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
                 }
             }
             return theRequest;
         }
 
         function getArticleDetail() {
-            if(!!storage.editorHtml) {
+            if (!!storage.editorHtml) {
                 $('.ql-editor').html(storage.editorHtml);
                 return;
             }
             $.ajax({
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId,
-                success: function(article) {
-                    console.log(article)
+                success: function (article) {
                     $('.ql-editor').html(article.context);
                 }
             })
         }
 
-        window.onunload = function() {
-            window.localStorage.clear();
-        }
     })
 </script>
 </body>

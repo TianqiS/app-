@@ -70,6 +70,7 @@
 }
 
 .ql-toolbar {
+    margin-top: 30px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -130,4 +131,71 @@ span[data-value="微软雅黑"]::before {
 }
 .ql-font-微软雅黑 {
     font-family: "微软雅黑";
+}
+
+.template {
+    margin-left: 40px;
+}
+
+.templateInput {
+    color: gray;
+    margin-left: 10px;
+    margin-top: 30px;
+    border:none;
+    border-bottom:1px solid rgba(144, 171, 170, 0.81);
+    outline: none;
+}
+
+.attachmentContainer {
+    display: inline-block;
+    width: 60px;
+    height: 83px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+}
+
+.attachmentContainer:hover .uploader_image img{
+    opacity: 0.5;
+}
+
+.uploader_photo {
+    color: #000000!important;
+}
+
+.uploader_photo .uploader_image {
+    /*position: relative;*/
+}
+
+.uploader_photo .uploader_fileName {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*.uploader_photo:hover .uploader_remove {*/
+    /*pointer-events: auto;*/
+    /*opacity: 0.5;*/
+    /*cursor: pointer;*/
+/*}*/
+
+.hide {
+    display: none!important;
+}
+
+.removeAttachment {
+    cursor: pointer;
+    float: left;
+    display: block;
+    position: relative;
+    text-align: center;
+    bottom: 42px;
+    background-color: black;
+    width: 60px;
+    opacity: 0.8;
+}
+
+.removeAttachment img {
+    height: 15px;
 }

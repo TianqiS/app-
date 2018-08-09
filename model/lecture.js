@@ -17,11 +17,7 @@ const lecture = new Schema({
     theme: {
         type: String,
         required: true
-    },
-    details: {
-        type: String,
-        required: true
     }
 });
 
-module.exports = lecture
+module.exports = lecture;

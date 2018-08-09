@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>资讯后台管理系统</title>
+    <script src="../js/templateMap.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/semantic.min.js"></script>
     <script src="../js/jquery.fileupload.js"></script>
     <script src="../js/quill.js"></script>
+    <script src="../js/fileupload.js"></script>
     <script src="../js/image-resize.min.js"></script>
     <link rel="stylesheet" href="../css/quill.snow.css">
+    <link rel="stylesheet" href="../css/uploadfile.css">
     <link rel="stylesheet" href="../css/semantic.min.css" type="text/css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/article.css">
@@ -17,7 +20,7 @@
 <div class="outsidePart">
     <div class="mainContainer">
         <div class="plateDropdown">
-            <select class="ui dropdown" id="dropdown">
+            <select class="ui dropdown" id="dropDown">
                 <option value="">选择模块</option>
             </select>
         </div>
@@ -50,10 +53,6 @@
             <button class="ui olive button saveButton" id="saveButton">保存</button>
             <button class="ui red button deleteButton" id="deleteButton">删除</button>
         </div>
-        <!--<div class="ql-container ql-snow">-->
-            <!--<div class="ql-editor">-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </div>
 <script>
@@ -64,13 +63,14 @@
     $(function() {
         var picId;
         var plateList = [];
-        var $dropdown = $('#dropdown');
+        var articleInfo = {};
+        var $dropdown = $('#dropDown');
         var $uploadFile = $('#uploadFile');
         var $image = $('.Pic').find($('img'));
-        var $template = $('.template');
         var request = new GetRequest();
         var articleId = request.articleId || '';
         var storage = window.localStorage;
+        var template = {};
         //编辑器配置
         var toolbarOptions = [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -143,32 +143,38 @@
             storage.editorHtml = quill.container.firstChild.innerHTML;
         });
 
-
+        $dropdown.change(function () {
+            template = {};
+            writeTemplate($dropdown.val(), template, articleInfo);
+        });
 
         $('#saveButton').click(function() {
-            var html = quill.container.firstChild.innerHTML;
-            var url = '../admin/addArticle';
-            var data = {
-                title: $("input[name=articleName]").val(),
-                context: html,
-                type: $dropdown.val()
-            };
-            if(!!articleId) {
-                data.articleId = articleId;
-                url = '../admin/updateArticle';
-            }
-            if($("input[name='addPic']").get(0).checked === true ) data.pic_url = picId;
-            $.ajax({
-                method: 'post',
-                "data": data,
-                "url": url,
-                success: function(newArticleId) {
-                    window.alert('保存成功');
-                    window.location.href = '../admin/article.html?articleId=' + newArticleId;
-                },
-                error: function(err) {
-                    window.alert('出错了请重试');
+            setTimeout(function () {
+                var html = quill.container.firstChild.innerHTML;
+                var url = '../admin/addArticle';
+                var data = {
+                    title: $("input[name=articleName]").val(),
+                    context: html,
+                    type: $dropdown.val(),
+                    "template": template
+                };
+                if(!!articleId) {
+                    data.articleId = articleId;
+                    url = '../admin/updateArticle';
                 }
+                if($("input[name='addPic']").get(0).checked === true ) data.pic_url = picId;
+                $.ajax({
+                    method: 'post',
+                    "data": data,
+                    "url": url,
+                    success: function(newArticleId) {
+                        window.alert('保存成功');
+                        window.location.href = '../admin/article.html?articleId=' + newArticleId;
+                    },
+                    error: function(err) {
+                        window.alert('出错了请重试');
+                    }
+                })
             })
         });
 
@@ -230,17 +236,33 @@
             $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
             $('#viewButton').removeClass('viewButton').addClass('viewButtonUpdate');
 
+            console.log($dropdown)
+
             $.ajax({
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId,
                 success: function(article) {
+                    delete article.template._id;
+                    delete article.template.templateType;
+                    articleInfo = article;
                     $("input[name='articleName']").val(article.title);
                     if(!!article.pic_url) {
                         $image.attr('src', article.pic_url.attachment_url);
                         $("input[name='addPic']").attr('checked', 'true');
                     }
-                    $dropdown.val(article.type);
+                    $dropdown.val(article.type * 1);
                     $('.text').text(plateList[article.type - 1]["article_type"]);
+                    writeTemplate(article.type, template, articleInfo);
+                    for(var i in article.template) {
+                        if($(`input[name=${i}]`).length <= 0) {
+                            template[i] = template[i] || [];
+                            for(var e of article.template[i]) {
+                                template[i].push(e._id)
+                            }
+                            continue;
+                        }
+                        $(`input[name=${i}]`).val(article.template[i]);
+                    }
                     quill.container.firstChild.innerHTML = article.context;
                 },
                 error: function(err) {
@@ -248,10 +270,6 @@
                 }
             })
         }
-//
-//        function getTemplate(articleType) {
-//
-//        }
     })
 </script>
 </body>
