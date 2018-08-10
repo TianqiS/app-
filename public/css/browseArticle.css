@@ -1,15 +1,20 @@
+html, body {
+    margin: 0;
+    width: 100%;
+    min-height: 500px;
+    font-family: 苹方, 微软雅黑;
+}
+
+
 .container {
-    top: 30%;
     min-width: 300px;
     max-width: 340px;
-    /*min-height: 450px;*/
     background-color: white;
     position: absolute;
     left: 0;
     right: 0;
     margin-right: auto;
     margin-left: auto;
-    border-radius: 10px;
 }
 
 .template {
@@ -56,17 +61,14 @@
     text-overflow: ellipsis;
 }
 
-
-/*.uploader_photo:hover .uploader_remove {*/
-/*pointer-events: auto;*/
-/*opacity: 0.5;*/
-/*cursor: pointer;*/
-/*}*/
-
 .hide {
     display: none!important;
 }
 
 .ql-editor {
     height: auto !important;
+}
+
+.ql-container.ql-snow {
+    border: none;
 }

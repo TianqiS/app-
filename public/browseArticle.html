@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>资讯后台管理系统</title>
-    <script src="../js/templateMap.js"></script>
-    <script src="../js/jquery.js"></script>
-    <script src="../js/quill.js"></script>
-    <link rel="stylesheet" href="../css/quill.snow.css">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/viewArticle.css">
+    <script src="./js/templateMap.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/quill.js"></script>
+    <link rel="stylesheet" href="./css/quill.snow.css">
+    <link rel="stylesheet" href="./css/browseArticle.css">
 </head>
 <body>
 <div class="ql-container ql-snow container">
@@ -21,7 +20,6 @@
 
         var request = new GetRequest();
         var articleId = request.articleId || '';
-        var storage = window.localStorage;
 
         getArticleDetail();
 
@@ -39,10 +37,6 @@
         }
 
         function getArticleDetail() {
-            if (!!storage.editorHtml) {
-                $('.ql-editor').html(storage.editorHtml);
-                return;
-            }
             $.ajax({
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId,

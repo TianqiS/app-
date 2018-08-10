@@ -69,6 +69,10 @@
     width: 80%;
 }
 
+.ql-editor {
+    padding: 12px 149px;
+}
+
 .ql-toolbar {
     margin-top: 30px;
     text-align: center;
