@@ -45,7 +45,8 @@ exports.addArticle = function (articleInfo) {
         context: articleInfo.context,
         type: articleInfo.type,
         create_time: formatDateTime(new Date()),
-        pic_url: articleInfo.pic_url
+        pic_url: articleInfo.pic_url,
+        isIndex: articleInfo.isIndex
     }).then(result => {
         let typeModel = templateMap[articleInfo.type];
         result.template =  {};
@@ -101,9 +102,6 @@ exports.getArticleList = function (articleType, pageInfo) {
     }).sort({'_id': -1}).populate('pic_url', 'attachment_url').skip(pageNumber).limit(perPage).populate({
         path: 'template.attachment_list',
         model: 'attachment'
-    }).populate({
-        path: 'template.attach_id',
-        model: 'attachment'
     })
 };
 
@@ -114,9 +112,6 @@ exports.getOneArticle = function (articleId) {
         $inc: {"readingVolume": 1}
     }).populate('pic_url', 'attachment_url').populate({
         path: 'template.attachment_list',
-        model: 'attachment'
-    }).populate({
-        path: 'template.attach_id',
         model: 'attachment'
     })
 };
@@ -135,5 +130,19 @@ exports.searchArticle = function (keyword, time) {
             }
         ]
     }).populate('pic_url', 'attachment_url');
+};
+
+exports.getIndexArticle = function (pageInfo) {
+    let page = pageInfo.page * 1|| 1;
+    let perPage = pageInfo.perPage * 1 || 10;
+    let pageNumber = (page - 1) * perPage;
+
+    return articleModel.find({
+        isIndex: true
+    }).skip(pageNumber).limit(perPage).populate('pic_url', 'attachment_url').populate({
+        path: 'template.attachment_list',
+        model: 'attachment',
+        select: 'attachment_url'
+    })
 };
 

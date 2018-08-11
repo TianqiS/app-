@@ -59,16 +59,17 @@
 
         function getArticleList(plateId, page, perPage) {
             return new Promise(function (resolve, reject) {
+                let url = !!(plateId * 1)? `../common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}` : `../common/getIndex?page=${page}&&perPage=${perPage}`;
                 return $.ajax({
                     method: 'get',
-                    url: `../common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}`,
+                    "url": url,
                     success: function (articleList) {
                         if (articleList.length === 0) return resolve(pageStatus = false);
                         clearList();
                         pageStatus = true;
                         articleList.forEach(e => {
                             var time = new Date(e.create_time).Format('yyyy-MM-dd');
-                            var articleDiv = `<div class="five wide column">${e.title}</div><div class="six wide column">阅读量${e.readingVolume}</div><div class="five wide column" style="text-align: center">${time}</div>`;
+                            var articleDiv = `<div class="five wide column" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">${e.title}</div><div class="six wide column">阅读量${e.readingVolume}</div><div class="five wide column" style="text-align: center">${time}</div>`;
                             $articleList.append(`<div class="sixteen wide column ui grid articleContainer"><div style="display: none" class="article_id">${e._id}</div>${articleDiv}</div>`)
                         });
                         $('.articleContainer').click(function() {
@@ -108,6 +109,7 @@
                     url: '../common/plateList',
                     method: 'get',
                     success: function (plateInfo) {
+                        $dropdown.append("<option value='index'>主页</option>");
                         for (var plate of plateInfo) {
                             $dropdown.append("<option value='" + plate._id + "'>" + plate.article_type + "</option>")
                         }

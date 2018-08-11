@@ -31,6 +31,12 @@
     outline: none;
 }
 
+.addIndex {
+    margin-top: 40px;
+    color: gray;
+    margin-left: 40px;
+}
+
 .articlePic {
     color: gray;
     margin-top: 40px;

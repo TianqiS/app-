@@ -44,6 +44,13 @@
                 </div>
             </div>
         </div>
+        <div class="addIndex">
+            <span>主页显示</span>
+            <div class="ui checkbox">
+                <input type="checkbox" class="checkInput" value="addIndex" name="addIndex">
+                <label></label>
+            </div>
+        </div>
         <div class="template"></div>
         <div class="articleEditor">
         </div>
@@ -156,13 +163,16 @@
                     title: $("input[name=articleName]").val(),
                     context: html,
                     type: $dropdown.val(),
-                    "template": template
+                    "template": template,
+                    isIndex: false,
+                    pic_url: ""
                 };
                 if(!!articleId) {
                     data.articleId = articleId;
                     url = '../admin/updateArticle';
                 }
                 if($("input[name='addPic']").get(0).checked === true ) data.pic_url = picId;
+                if($("input[name='addIndex']").get(0).checked === true) data.isIndex = true;
                 $.ajax({
                     method: 'post',
                     "data": data,
@@ -236,7 +246,6 @@
             $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
             $('#viewButton').removeClass('viewButton').addClass('viewButtonUpdate');
 
-            console.log($dropdown)
 
             $.ajax({
                 method: 'get',
@@ -250,6 +259,7 @@
                         $image.attr('src', article.pic_url.attachment_url);
                         $("input[name='addPic']").attr('checked', 'true');
                     }
+                    if(!!article.isIndex) $("input[name='addIndex']").attr('checked', true);
                     $dropdown.val(article.type * 1);
                     $('.text').text(plateList[article.type - 1]["article_type"]);
                     writeTemplate(article.type, template, articleInfo);

@@ -22,7 +22,7 @@ const article = new Schema({
         max: 6
     },
     readingVolume: {
-        defaultValue: 0,
+        default: 0,
         type: Number,
     },
     template: template.templateModel,
@@ -36,6 +36,10 @@ const article = new Schema({
     pic_url: {
         type: Number,
         ref: 'attachment'
+    },
+    isIndex: {
+        type: Boolean,
+        default: false
     }
 });
 

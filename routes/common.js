@@ -6,7 +6,6 @@ const Joi = require('joi');
 const Extension = require('joi-date-extensions');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
-const indexModule = require('../module/index');
 const typeModule = require('../module/type');
 const utils = require('../utils/utils');
 const JoiDate = Joi.extend(Extension);
@@ -128,7 +127,7 @@ router.get('/getIndex', async function (ctx) {
     Joi.validate(pageInfo, schema, function(err) {
         if(err) throw 40001;
     });
-    let result = await indexModule.getIndex(pageInfo);
+    let result = await articleModule.getIndexArticle(pageInfo);
 
     ctx.body = result;
 });
