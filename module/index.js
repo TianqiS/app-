@@ -26,7 +26,13 @@ exports.getIndex = function (pageInfo) {
     let pageNumber = (page - 1) * perPage;
     return indexModel.find({
         article_id: {$ne: null}
-    }).skip(pageNumber).limit(perPage).populate('article_id').catch(err => {
+    }).skip(pageNumber).limit(perPage).populate({
+        path: 'article_id',
+        populate: {
+            path: 'pic_url',
+            select: 'attachment_url'
+        }
+    }).catch(err => {
         if (err) throw 40003;
     });
 };
