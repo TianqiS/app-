@@ -180,7 +180,6 @@ var writeTemplate = function (templateId, template, articleInfo) {
 var renderingPic = function (articleInfo) {
     if (!articleInfo) return;
     $('.template').append('<div id="attachment"></div>');
-    console.log(articleInfo)
     var attachmentList = articleInfo.template.attachment_list;
     for (var attachment of attachmentList) {
         $('#attachment').append(`
