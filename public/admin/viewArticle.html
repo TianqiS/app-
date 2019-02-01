@@ -39,21 +39,19 @@
         }
 
         function getArticleDetail() {
-            if (!!storage.editorHtml) {
-                $('.ql-editor').html(storage.editorHtml);
-                return;
-            }
-            $.ajax({
-                method: 'get',
-                url: '../common/getOneArticle?articleId=' + articleId,
-                success: function (article) {
-                    $('.ql-editor').html(article.context);
-                    if(article.template.attachment_list && article.template.attachment_list.length != 0) {
-                        $('.container').append('<div class="template"></div>');
-                        renderingPic(article);
-                    }
-                }
-            })
+          $('.ql-editor').html(storage.editorHtml);
+          return;
+            // $.ajax({
+            //     method: 'get',
+            //     url: '../common/getOneArticle?articleId=' + articleId,
+            //     success: function (article) {
+            //         $('.ql-editor').html(article.context);
+            //         if(article.template.attachment_list && article.template.attachment_list.length != 0) {
+            //             $('.container').append('<div class="template"></div>');
+            //             renderingPic(article);
+            //         }
+            //     }
+            // })
         }
 
     })
