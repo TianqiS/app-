@@ -6,6 +6,7 @@ const Joi = require('joi');
 const Extension = require('joi-date-extensions');
 const adminModule = require('../module/admin');
 const articleModule = require('../module/article');
+const attachmentModule = require('../module/attachment');
 const typeModule = require('../module/type');
 const utils = require('../utils/utils');
 const JoiDate = Joi.extend(Extension);
@@ -131,5 +132,13 @@ router.get('/getIndex', async function (ctx) {
 
     ctx.body = result;
 });
+
+router.get('/attachmentInfo', async function(ctx) {
+    let attachmentId = ctx.query.attachmentId;
+
+    let attachment = await attachmentModule.getAttachment(attachmentId);
+
+    ctx.body = attachment;
+})
 
 module.exports = router;

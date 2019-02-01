@@ -9,3 +9,7 @@ exports.uploadAttachment = function(filePath, fileName) {
         })
     })
 };
+
+exports.getAttachment = function(attachmentId) {
+    return attachmentModel.find({ _id: attachmentId });
+}
