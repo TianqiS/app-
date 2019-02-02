@@ -120,8 +120,9 @@
         var toolbar = quill.getModule('toolbar');
 
 
-        getListRefresh();
-        getArticleDeatil(articleId);
+        getListRefresh().then(function() {
+            getArticleDeatil(articleId);
+        });
 
         $uploadFile.ajaxfileupload({
             action: '../admin/upload',
