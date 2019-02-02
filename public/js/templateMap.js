@@ -27,6 +27,8 @@ var advertisement = function (template, articleInfo) {
             arrayRemove(data._id, template.attachment_list);
         }
     });
+    if ($.isEmptyObject(articleInfo)) return;
+
     renderingPic(articleInfo);
     addEditPic(template, articleInfo.template.attachment_list);
 };
@@ -66,6 +68,8 @@ var competition = function (template, articleInfo) {
         template.start_time = $("input[name='start_time']").val();
         template.final_time = $("input[name='final_time']").val();
     });
+
+    if ($.isEmptyObject(articleInfo)) return;
 
     renderingPic(articleInfo);
     addEditPic(template, articleInfo.template.attachment_list);
@@ -178,7 +182,6 @@ var writeTemplate = function (templateId, template, articleInfo) {
 };
 
 var renderingPic = function (articleInfo) {
-    if (!articleInfo) return;
     $('.template').append('<div id="attachment"></div>');
     var attachmentList = articleInfo.template.attachment_list;
     for (var attachment of attachmentList) {
