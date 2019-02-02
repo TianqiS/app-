@@ -7,12 +7,28 @@
     <script src="./js/templateMap.js"></script>
     <script src="./js/jquery.js"></script>
     <script src="./js/quill.js"></script>
+    <script src="./js/common.js"></script>
     <link rel="stylesheet" href="./css/quill.snow.css">
-    <link rel="stylesheet" href="./css/browseArticle.css">
+    <link rel="stylesheet" href="./css/viewArticle.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        .footer {
+            padding-bottom: 10px;
+            color: gray;
+            text-align: center;
+        }
+        .attachment {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div class="ql-container ql-snow container">
-    <div class="ql-editor">
+    <div class="ql-editor"></div>
+    <div class="attachment"></div>
+    <div class="footer">
+        <hr>
+        Copyright ©红色家园网络工作室
     </div>
 </div>
 <script>
@@ -43,8 +59,19 @@
                 success: function (article) {
                     $('.ql-editor').html(article.context);
                     if(article.template.attachment_list && article.template.attachment_list.length != 0) {
-                        $('.container').append('<div class="template"></div>');
-                        renderingPic(article);
+                        article.template.attachment_list.forEach(function(attachment) {
+                            renderAttachment($('.attachment'), attachment);
+                            var $photo = $('.uploader_photo');
+                            $photo.each(function (i, e) {
+                                var $e = $(e);
+                                var nameArray = $e.attr('name').split('.');
+                                var ext = nameArray[nameArray.length - 1].toUpperCase();
+                                $e.find('img').attr('src', '/img/file/' + ext + '.png');
+                            });
+                            $photo.find('img').on('error', function () {
+                                if (this.src != '/img/file/UNKNOW.png') this.src = '/img/file/UNKNOW.png';
+                            })
+                        })
                     }
                 }
             })
