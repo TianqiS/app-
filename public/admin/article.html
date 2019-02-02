@@ -77,7 +77,7 @@
         var request = new GetRequest();
         var articleId = request.articleId || '';
         var storage = window.localStorage;
-        var template = {};
+        var template = {}; //保存时会用到的变量
         //编辑器配置
         var toolbarOptions = [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -145,7 +145,7 @@
         toolbar.addHandler('image', function() {
             $('#editorUpload').click();
         });
-
+        //对编辑器进行监听
         quill.on('text-change', function(delta, oldDelta, source) {
             storage.editorHtml = quill.container.firstChild.innerHTML;
         });
@@ -206,8 +206,16 @@
         });
 
         $('#viewButton').click(function() {
+            var attachmentList = template.attachment_list || [];
+            var midArray = []; // 用于存储附件id的中间数组，后面在进行数组转字符串的时候会用到，因为window.storage键值存储的值的格式为string格式，所以要转换为字符串
+            storage.removeItem('attachment_list');
+            if(attachmentList.length != 0) {
+                attachmentList.forEach(function(attachment) {
+                    midArray.push(attachment)
+                })
+                storage.attachment_list = midArray.join();
+            }
             var url = '../admin/viewArticle.html';
-            if(!!articleId) url += '?articleId=' + articleId;
             window.open(url);
         });
 
@@ -242,6 +250,7 @@
 
         function getArticleDeatil(articleId) {
             if(!articleId) return;
+            //下面的样式修改代码是为了更好地对三个按钮进行排版
             $('#saveButton').removeClass('saveButton').addClass('saveButtonUpdate');
             $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
             $('#viewButton').removeClass('viewButton').addClass('viewButtonUpdate');
