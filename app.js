@@ -39,7 +39,7 @@ app.use(utils.errHandle);
 
 app.use(utils.session());
 //login
-// app.use(utils.isLogin);
+app.use(utils.isLogin);
 
 app.use(require('koa-static')(__dirname + '/public'))
 

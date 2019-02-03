@@ -41,7 +41,7 @@ exports.errHandle = async function (ctx, next) {
 exports.isLogin = async function (ctx, next) {
     var str = ctx.request.url;
     str = str.split('/')[1];
-    if (_.indexOf(['admin'], str) != -1) {
+    if (str === 'admin') {
         // 判断是否有session
         if (ctx.session.type === 'admin') {
             await next();
