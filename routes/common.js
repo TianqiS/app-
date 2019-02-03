@@ -84,15 +84,17 @@ router.get('/getOnePlate', async function (ctx) {
 
 router.get('/getOneArticle', async function (ctx) {
     let articleId = ctx.request.query.articleId;
+    let isIncreasing = ctx.request.query.isIncreasing;
     let schema = {
-        articleId : Joi.number()
+        articleId : Joi.number(),
+        isIncreasing: Joi.boolean().optional()
     };
 
     Joi.validate({"articleId":articleId}, schema, function (err) {
         if(err) throw 40001;
     });
 
-    let result = await articleModule.getOneArticle(articleId);
+    let result = await articleModule.getOneArticle(articleId, isIncreasing);
 
     ctx.body = result;
 });

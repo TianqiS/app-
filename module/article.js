@@ -105,11 +105,11 @@ exports.getArticleList = function (articleType, pageInfo) {
     })
 };
 
-exports.getOneArticle = function (articleId) {
+exports.getOneArticle = function (articleId, increasingVolume) { // increasingVolume 表示是否增加访问量
     return articleModel.findOneAndUpdate({
         _id: articleId
     }, {
-        $inc: {"readingVolume": 1}
+        $inc: {"readingVolume": increasingVolume? 1 : 0}
     }).populate('pic_url', 'attachment_url').populate({
         path: 'template.attachment_list',
         model: 'attachment'

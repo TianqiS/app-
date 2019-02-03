@@ -54,7 +54,7 @@
         function getArticleDetail() {
             $.ajax({
                 method: 'get',
-                url: '../common/getOneArticle?articleId=' + articleId,
+                url: '../common/getOneArticle?articleId=' + articleId + '&isIncreasing=true',
                 success: function (article) {
                     $('.ql-editor').html(article.context);
                     if(article.template.attachment_list && article.template.attachment_list.length != 0) {
