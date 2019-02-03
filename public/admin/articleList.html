@@ -59,7 +59,8 @@
 
         function getArticleList(plateId, page, perPage) {
             return new Promise(function (resolve, reject) {
-                let url = !!(plateId * 1)? `../common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}` : `../common/getIndex?page=${page}&&perPage=${perPage}`;
+                if(!plateId) return;
+                let url = !!(plateId * 1)? `/common/articleList?articleType=${plateId}&&page=${page}&&perPage=${perPage}` : `/common/getIndex?page=${page}&&perPage=${perPage}`;
                 return $.ajax({
                     method: 'get',
                     "url": url,
