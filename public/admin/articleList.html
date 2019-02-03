@@ -64,8 +64,12 @@
                     method: 'get',
                     "url": url,
                     success: function (articleList) {
+                        //下面if中判断页数是否为1是为了防止出现点击一个文章为空的板块时，不会对articleList进行刷新的bug
+                        if (articleList.length === 0) {
+                            if(page === 1) clearList();
+                            return resolve(pageStatus = false);
+                        }
                         clearList();
-                        if (articleList.length === 0) return resolve(pageStatus = false);
                         pageStatus = true;
                         articleList.forEach(e => {
                             var time = new Date(e.create_time).Format('yyyy-MM-dd');
