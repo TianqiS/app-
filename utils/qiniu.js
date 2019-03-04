@@ -9,12 +9,12 @@ let getUploadToken = function(filePath) {
     let mac = qiniu.auth.digest.Mac();
     let bucket = config.qiniu.bucket;
     let buffer = readChunk.sync(filePath, 0, 4100);
-    let isImg = '';
+    // let isImg = '';
     let type = filetype(buffer);
-    if(type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim'
+    // if(type.ext === "gif" || type.ext === "png" || type.ext === "jpg") isImg = '?imageView2/0/format/jpg/q/75|imageslim'
     let options = {
         scope: bucket,
-        returnBody: `{"url": "http://hduinmnt.qiniu.hduin.club/$(key)${isImg}", "key": "$(key)"}`
+        returnBody: `{"url": "http://hduinmnt.qiniu.hduin.club/$(key)", "key": "$(key)"}`
     };
     let putpolicy = new qiniu.rs.PutPolicy(options);
     let uploadToken = putpolicy.uploadToken(mac);
