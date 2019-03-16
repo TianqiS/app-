@@ -143,6 +143,8 @@ exports.getIndexArticle = function (pageInfo) {
         path: 'template.attachment_list',
         model: 'attachment',
         select: 'attachment_url'
+    }).sort({
+        create_time: -1
     })
 };
 
