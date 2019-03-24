@@ -60,6 +60,8 @@
             <button class="ui orange button viewButton" id=viewButton> 预览</button>
             <button class="ui olive button saveButton" id="saveButton">保存</button>
             <button class="ui red button deleteButton" id="deleteButton">删除</button>
+            <button class="ui blue button backButton" id="backButton">返回</button>
+
         </div>
     </div>
 </div>
@@ -80,6 +82,7 @@
         var storage = window.localStorage;
         var template = {}; //保存时会用到的变量
         //编辑器配置
+        var $backButton = $('.backButton');
         var toolbarOptions = [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
             ['blockquote', 'code-block'],
@@ -157,6 +160,14 @@
             writeTemplate($dropdown.val(), template, articleInfo);
         });
 
+        /*$('#backButton').click(function () {
+            alert("dasda");
+            window.location.href="../admin/articleList.html";
+        });*/
+        $backButton.click(function () {
+            window.location.href="../admin/articleList.html";
+        });
+
         $('#saveButton').click(function() {
             setTimeout(function () {
                 var html = quill.container.firstChild.innerHTML;
@@ -221,6 +232,7 @@
             window.open(url);
         });
 
+
         function getListRefresh() {
             return new Promise(function (resolve, reject) {
                 return $.ajax({
@@ -256,6 +268,7 @@
             $('#saveButton').removeClass('saveButton').addClass('saveButtonUpdate');
             $('#deleteButton').removeClass('deleteButton').addClass('deleteButtonUpdate');
             $('#viewButton').removeClass('viewButton').addClass('viewButtonUpdate');
+
 
 
             $.ajax({

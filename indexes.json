@@ -1,0 +1,25 @@
+{ 
+    "_id" : NumberInt(0), 
+    "__v" : NumberInt(0), 
+    "seq" : NumberInt(4)
+}
+{ 
+    "_id" : NumberInt(1), 
+    "article_id" : NumberInt(32), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(2), 
+    "article_id" : NumberInt(9), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(3), 
+    "article_id" : NumberInt(36), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(4), 
+    "article_id" : NumberInt(37), 
+    "__v" : NumberInt(0)
+}

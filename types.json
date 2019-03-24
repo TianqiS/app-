@@ -1,0 +1,41 @@
+{ 
+    "_id" : NumberInt(0), 
+    "__v" : NumberInt(0), 
+    "seq" : NumberInt(6)
+}
+{ 
+    "_id" : NumberInt(1), 
+    "article_type" : "广告", 
+    "pic_url" : NumberInt(5), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(2), 
+    "article_type" : "比赛", 
+    "pic_url" : NumberInt(2), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(3), 
+    "article_type" : "讲座", 
+    "pic_url" : NumberInt(34), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(4), 
+    "article_type" : "新闻", 
+    "pic_url" : NumberInt(35), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(5), 
+    "article_type" : "招聘", 
+    "pic_url" : NumberInt(6), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : NumberInt(6), 
+    "article_type" : "微信", 
+    "pic_url" : NumberInt(55), 
+    "__v" : NumberInt(0)
+}

@@ -22,6 +22,9 @@
             <a href="../admin/article.html">
                 <button class="ui olive button saveButton">新建文章</button>
             </a>
+            <a href="../admin/index.html">
+                <button class="ui blue button backButton">返回</button>
+            </a>
         </div>
     </div>
     <div class="articleList">
@@ -55,6 +58,8 @@
             refreshPage(1);
             plateId = $dropdown.val();
             getArticleList(plateId, 1, perPageNum);
+
+
         });
 
         function getArticleList(plateId, page, perPage) {
@@ -154,6 +159,8 @@
             window.location.href = '../admin/article.html?articleId=' + articleId;
         }
     })
+
+
 </script>
 </body>
 </html>
