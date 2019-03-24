@@ -15,7 +15,7 @@
     <div class="top">
         <div class="plateDropdown">
             <select class="ui dropdown" id="dropdown">
-                <option value="">选择模块</option>
+                <option value="">主页</option>
             </select>
         </div>
         <div class="createArticleButton">
@@ -49,16 +49,16 @@
         var $articleList = $('#articleList');
         var $lastPage = $('.lastPage');
         var $nextPage = $('.nextPage');
-
         refreshPage(1);
         getListRefresh();
+        plateId = $dropdown.val('主页')
+        getArticleList(plateId, 1, perPageNum);
 
         $dropdown.change(function () {
             pageStatus = true;
             refreshPage(1);
             plateId = $dropdown.val();
             getArticleList(plateId, 1, perPageNum);
-
 
         });
 
@@ -95,6 +95,7 @@
                 })
             })
         }
+
 
         $lastPage.click(function () {
             --currentPage;
