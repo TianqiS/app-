@@ -56,6 +56,7 @@
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId + '&isIncreasing=true',
                 success: function (article) {
+                    article = article[0];
                     $('.ql-editor').html(article.context);
                     if(article.template.attachment_list && article.template.attachment_list.length != 0) {
                         article.template.attachment_list.forEach(function(attachment) {
