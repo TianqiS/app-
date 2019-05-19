@@ -105,8 +105,8 @@ router.post('/addVolume',async function(ctx){
     Joi.validate({"articleId":articleId}, schema, function (err) {
         if(err) throw 40001;
     });
-      articleModule.addVolume(articleId);
-      ctx.body = "success"
+    await articleModule.addVolume(articleId);
+    ctx.body = "success"
 
 });
 
