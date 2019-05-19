@@ -275,6 +275,7 @@
                 method: 'get',
                 url: '../common/getOneArticle?articleId=' + articleId,
                 success: function(article) {
+                    article = article[0];
                     delete article.template._id;
                     delete article.template.templateType;
                     articleInfo = article;
