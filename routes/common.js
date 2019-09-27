@@ -152,6 +152,33 @@ router.get('/attachmentInfo', async function(ctx) {
     let attachment = await attachmentModule.getAttachment(attachmentId);
 
     ctx.body = attachment;
-})
+});
+
+router.get('/sunnySport', async (ctx) => {
+    //获取年级
+    let studentId = ctx.query.studentId;
+    let grade = studentId.substr(0,2);
+    let dateFirst = new Date("20"+grade+"/9/1");
+    let dateNow = new Date();
+    let dateSub = dateNow.getTime() - dateFirst.getTime();
+    grade = Math.ceil(dateSub / (24*3600*1000) /365);
+    //计算剩余天数
+    let dateLast = new Date("2019/12/16");   //结束日期，每学期手动设定
+    let dateSub2 = dateLast.getTime() - dateNow.getTime();
+    let restDay = Math.ceil(dateSub2 / (24*3600*1000)) + 1;
+    //返回信息
+    let body = {
+        'restDay': restDay,
+        'fullTimes': 0   //其他年级返回0
+    };
+    if(grade === 1) {   //大一
+        body.fullTimes = 30
+    } else if(grade === 2) {   //大二
+        body.fullTimes = 36
+    } else if(grade === 3) {   //大三
+        body.fullTimes = 36
+    }
+    ctx.body = body;
+});
 
 module.exports = router;
